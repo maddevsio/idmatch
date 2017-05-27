@@ -1,0 +1,122 @@
+.documents-form{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 80px;
+}
+.inputfile{
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.my_photo, .my_scan, .submit{
+  width: 290px;
+  height: 90px;
+  label{
+    border-radius: 3px;
+    background: #30b76c;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    line-height: 1.35;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    .add_item{
+      white-space: nowrap;
+      overflow: hidden;
+      padding-right: 35px;
+      text-overflow: ellipsis;
+    }
+    img{
+      margin: auto 10px auto 0;
+      border-right: 1px solid rgba(145, 220, 90, 0.61);
+      padding: 20px;
+    }
+  }
+}
+.my_scan{
+  label{
+    background: #fac478;
+    img{
+      border-right: 1px solid rgba(166, 124, 84, 0.6);
+    }
+  }
+}
+.submit{
+  label{
+    background: #3360a3;
+    span{
+      border-right: 1px solid #4998F5;
+      margin-right: 10px;
+    }
+    img{
+      border-right: none;
+      margin-right: 0;
+    }
+  }
+}
+.disabled{
+  opacity: .5;
+  cursor: default;
+  label{
+    cursor: default;
+  }
+}
+.arrows{
+  transition: all 1s;
+  margin-left: -60px;
+  //transition: fill-opacity .5s;
+  path{
+    fill-opacity: 0;
+    transition: all 1s;
+  }
+}
+.arrows.animate{
+  transition: all .5s;
+  transform: translateX(30px);
+  path{
+    transition: all .5s;
+    fill-opacity: 1;
+    fill: #30b76c;
+  }
+}
+#arrows_dock.animate{
+  path{
+    fill: #fac478;
+  }
+}
+.info-wrap{
+  position: relative;
+  text-align: center;
+  margin-top: 9px;
+  font-style: italic;
+  font-size: .84rem;
+  font-weight: 900;
+  i{
+    color: #E72530;
+    font-size: 1.4rem;
+    position: absolute;
+    top: -6px;
+    left: -7px;
+  }
+}
+.submit_rotate{
+  animation-name: rotation;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes rotation {
+  0% {
+    transform:rotate(0deg);
+  }
+  100% {
+    transform:rotate(360deg);
+  }
+}

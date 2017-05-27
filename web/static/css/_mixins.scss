@@ -1,0 +1,98 @@
+@mixin for-size($range) {
+  $phone-landscape: 550px;
+  $phone-upper-boundary: 600px;
+  $tablet-portrait-upper-boundary: 900px;
+  $tablet-product-view: 1024px;
+  $tablet-landscape-upper-boundary: 1200px;
+  $desktop-upper-boundary: 1800px;
+  $extra-upper-boundary: 1920px;
+
+  @if $range == phone-only {
+    @media (max-width: #{$phone-upper-boundary - 1}) { @content; }
+  }@else if $range == phone-only-landscape{
+    @media (orientation: landscape) and (min-width: #{$phone-landscape}) and (max-width: #{$tablet-portrait-upper-boundary}) { @content; }
+  } @else if $range == tablet-portrait-up {
+    @media (min-width: $phone-upper-boundary) { @content; }
+  } @else if $range == tablet-landscape-down {
+    @media (max-width: $tablet-portrait-upper-boundary) { @content; }
+  } @else if $range == tablet-view {
+    @media (max-width: $tablet-product-view) { @content; }
+  } @else if $range == tablet-landscape-up {
+    @media (min-width: $tablet-portrait-upper-boundary) { @content; }
+  } @else if $range == all-device-one-line {
+    @media (max-width: $tablet-landscape-upper-boundary) { @content; }
+  } @else if $range == desktop-up {
+    @media (min-width: $tablet-landscape-upper-boundary) { @content; }
+  } @else if $range == big-desktop-up {
+    @media (min-width: $desktop-upper-boundary) { @content; }
+  } @else if $range == extra-desktop-up {
+    @media only screen and (min-width: $extra-upper-boundary + 1) { @content; }
+  }
+}
+@include for-size(all-device-one-line){
+  section{
+    padding: 0;
+  }
+  .information-icons--wrap{
+    margin: 30px auto;
+  }
+  .inst{
+    padding: 0 20px;
+  }
+  .documents-form{
+    flex-direction: column;
+    .input-wrap{
+      margin-bottom: 90px;
+    }
+    .arrows{
+      display: none;
+    }  
+  }
+  .menu, .title, .ident-info, .footer-logo, .footer-information, .description {
+    padding: 0 30px;
+    width: auto;
+  }
+
+  .inst-info{
+    right: 40px;
+  }
+  .information-text{
+    p{
+      padding: 0 30px;
+    }
+  }
+}
+@include for-size(tablet-view){
+  .text-wrapper{
+    margin-left: 130px;
+  }
+  .results-images{
+    padding: 0 30px;
+    flex-direction: column;
+    justify-content: space-around;
+    .results-images--item-wrap, .results-info{
+      margin-bottom: 40px;
+    }
+  }
+  .information-icons--wrap{
+    justify-content: space-around;
+  }
+  .inst-info, .ident-info-prev, .text-wrapper{
+    display: none !important;
+    width: auto;
+  }
+  .mobile-title{
+    display: block;
+  }
+  #contacts{
+    height: 100%;
+    padding-bottom: 45px;
+    section{
+      flex-wrap: wrap;
+      justify-content: space-around;
+      .footer-logo{
+        margin: 30px auto;
+      }
+    }
+  }
+}

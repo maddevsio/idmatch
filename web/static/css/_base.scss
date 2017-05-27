@@ -1,0 +1,74 @@
+html {
+  height: 100%;
+}
+body{
+  display: flex;
+  font-size: 17px;
+  flex-direction: column;
+  min-height: 100%;
+  align-items: center;
+  font-family: 'Raleway-Light', sans-serif;
+}
+i{
+  font-style: inherit;
+}
+p{
+  line-height: 1.5;
+  font-size: 1.2rem;
+}
+header{
+  width: 100%;
+  color: #ffffff;
+  background: #3360a3 url('/static/icons/bg.jpg') center  no-repeat;
+  background-size: cover;
+}
+footer{
+  height: 90px;
+  background: #272c34;
+  width: 100%;
+  section{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-information{
+    color: #fff;
+    text-align: center;
+    a{
+      color: #E72530;
+    }
+  }
+}
+.disc{
+  line-height: 1.5;
+  font-size: 1.2rem;
+  margin: 35px auto;
+}
+.mobile-title{
+  display: none;
+}
+section{
+  max-width: 1100px;
+  width: 100%;
+  margin: auto;
+  padding: 0 30px;
+}
+h1{
+  font-family: 'RobotoSlab-Light', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+}
+img{
+  max-width: 100%;
+}
+.title{
+  font-family: 'RobotoSlab-Light', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  color: #3360a3;
+  margin: 50px auto 40px;
+}
+code{
+  font-family: Lucon-Console,sans-serif;
+}

@@ -1,0 +1,7 @@
+click==6.7
+matplotlib==2.0.0
+numpy==1.11.0
+Pillow==4.0.0
+
+Cython==0.25.2
+tesserocr==2.1.3

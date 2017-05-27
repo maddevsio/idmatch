@@ -1,0 +1,121 @@
+.my_photo{
+  .or{
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+  }
+  #open_takePhoto{
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    margin: auto;
+    span{
+      margin: auto;
+      align-items: center;
+      display: flex;
+    }
+    svg{
+      margin-left: 5px;
+    }
+  }
+}
+#close_modal{
+  position: absolute;
+  top:-25px;
+  right: -30px;
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.modal{
+  position: fixed;
+  top: 0; bottom: 0; right: 0; left:0;
+  height:100%;
+  width: 100%;
+  background: rgba(255,255,255, .8);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-body{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cam_btn{
+  border: none;
+  text-align: center;
+  color: #ffffff;
+  padding: 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: 15px 5px;
+  border-radius: 50%;
+  outline: none;
+}
+#startbutton{
+  background: #3360a3;
+  z-index: 3;
+}
+#apply{
+  background: #30b76c;
+  z-index: 2;
+  opacity: 0;
+  transition: all .7s;
+  width:60px;
+  height:60px;
+  &.show{
+    opacity: 1;
+    transition: all .7s;
+  }
+}
+#cancel{
+  background: #E72530;
+  z-index: 2;
+  opacity: 0;
+  transition: all .7s;
+  width:60px;
+  height:60px;
+  &.show{
+    opacity: 1;
+    transition: all .7s;
+  }
+}
+
+.camera{
+  position: relative;
+  width: 480px;
+  height: 360px;
+}
+#video, #canvas{
+  position: absolute;
+  z-index: 1;
+}
+#video{
+}
+#canvas{
+  display: none;
+}
+.flesh-animation{
+  animation-name: flash;
+  animation-duration: .3s;
+}
+@keyframes flash {
+  0%, 100% {
+    opacity: 1;
+  }
+  50%{
+    opacity: 0;
+  }
+}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}" sizes="16x16">
+    <link rel="manifest" href="{{ url_for('static', filename='favicons/manifest.json') }}">
+    <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="API которое распознает данные на ID-карточках и сравнивает лица">
+
+    <title>IDMATCH &mdash; Машинное обучение на службе у финансовых организаций/страховых компаний/брокеров/государства</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/styles.css') }}">
+  </head>
+  <body>
+    <header>
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-83208754-3', 'auto');
+        ga('send', 'pageview');
+      </script>
+      <section>
+        <div class="menu">
+          <a href="/" class="logotype">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" href="26d" viewBox="0 0 36 26">
+              <g id="Layer_1-2" data-name="Layer 1">
+                <polygon fill="#ffffff" points="0 26 9.36 26 14.4 0 5.04 0 0 26"/>
+                <path fill="#ffffff" d="M23,0H17V26h6v-.08A13.06,13.06,0,0,0,36,13,13.06,13.06,0,0,0,23,0Z"/>
+              </g>
+            </svg>
+            IDMATCH
+          </a>
+          <ul>
+            <li class="menu-wrap--item">
+              <a href="#contacts">Контакты</a>
+            </li>
+          </ul>
+        </div>
+        <h1 class="text-wrapper">
+          Машинное обучение на службе у&nbsp;
+          <div class="animated-words">
+            <span>финтеха</span>
+            <span>страхования</span>
+            <span>брокеров</span>
+            <span>государства</span>
+            <span>страхования</span>
+            <span>брокеров</span>
+          </div>
+        </h1>
+        <h1 class="mobile-title">Машинное обучение на службе у финтеха</h1>
+        <div class="description">
+          Наше API принимет изображение лица и изображение паспорта (айди карты) человека, а на выходе выдает процент
+          матчинга лица на паспорте и распознанный текст с паспорта в формате JSON
+        </div>
+        <div id="terminal">
+          <div id="typed-strings">
+            <p>
+              <i class="console-line">$</i> curl -X POST -F "<i class="console-text">face=@face.png</i>" -F "<i class="console-text">id=@id.png</i>" <i class="console-link">https://idmatch.co/match-and-ocr</i>
+            </p>
+          </div>
+        </div>
+        <div class="inst">
+          <div class="inst-info--console">
+            <div class="inst-info--console_header">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="code-snippet__content">
+	      {% include 'demo_code.html' %}
+              <div class="inst-info">
+                <div class="inst-info--prev">
+                  <img class="place-bg" srcset="{{ url_for('static', filename='icons/card.png') }}" alt="My default image">
+                </div>
+                <div class="inst-info-text">
+                  Процент совпадения лица на фотографии и
+                  распознаный текст с ID карты
+                  в JSON
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </header>
+    <section id="form-result">
+      <div class="title">Посмотрите как это работает</div>
+      <form class="documents-form" method="POST" enctype="multipart/form-data" action="/#form-result">
+        <div id="photo" class="input-wrap my_photo">
+          <label for="face">
+            <img width="40px" src="{{ url_for('static', filename='icons/cloud-computing.svg') }}" alt="">
+            <i data-message="Загрузите вашу фотографию" class="filename">Загрузите вашу фотографию</i>
+          </label>
+          <input class="inputfile" type="file" id="face" name="face">
+          <div class="webcam_btn">
+            <input name="faceWebcam" type="hidden" id="webcam-face">
+            <i class="or">или</i>
+            <button type="button" id="open_takePhoto">
+              <span>сделайте фотографию
+                <svg version="1.1" id="Capa_1" width="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
+                  <g>
+                    <path d="M55.201,15.5h-8.524l-4-10H17.323l-4,10H12v-5H6v5H4.799C2.152,15.5,0,17.652,0,20.299v29.368
+                             C0,52.332,2.168,54.5,4.833,54.5h50.334c2.665,0,4.833-2.168,4.833-4.833V20.299C60,17.652,57.848,15.5,55.201,15.5z M8,12.5h2v3H8
+                             V12.5z M58,49.667c0,1.563-1.271,2.833-2.833,2.833H4.833C3.271,52.5,2,51.229,2,49.667V20.299C2,18.756,3.256,17.5,4.799,17.5H6h6
+                             h2.677l4-10h22.646l4,10h9.878c1.543,0,2.799,1.256,2.799,2.799V49.667z"/>
+                    <path d="M30,14.5c-9.925,0-18,8.075-18,18s8.075,18,18,18s18-8.075,18-18S39.925,14.5,30,14.5z M30,48.5c-8.822,0-16-7.178-16-16
+                             s7.178-16,16-16s16,7.178,16,16S38.822,48.5,30,48.5z"/>
+                    <path d="M30,20.5c-6.617,0-12,5.383-12,12s5.383,12,12,12s12-5.383,12-12S36.617,20.5,30,20.5z M30,42.5c-5.514,0-10-4.486-10-10
+                             s4.486-10,10-10s10,4.486,10,10S35.514,42.5,30,42.5z"/>
+                    <path d="M52,19.5c-2.206,0-4,1.794-4,4s1.794,4,4,4s4-1.794,4-4S54.206,19.5,52,19.5z M52,25.5c-1.103,0-2-0.897-2-2s0.897-2,2-2
+                             s2,0.897,2,2S53.103,25.5,52,25.5z"/>
+                  </g>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+        <svg class="arrows" id="arrows" xmlns="http://www.w3.org/2000/svg" width="50px" viewBox="0 0 756.19 477.18">
+          <g id="Capa_1" data-name="Capa 1">
+            <path class="arrow_1" d="M500.24,229.08,275.14,4A13.51,13.51,0,0,0,256,23.08l215.5,215.5L256,454.08a13.55,13.55,0,0,0,9.5,23.1,13.17,13.17,0,0,0,9.5-4l225.1-225.1A13.43,13.43,0,0,0,500.24,229.08Z"/>
+            <path class="arrow_2" d="M248.18,229.08,23.08,4A13.51,13.51,0,1,0,4,23.08l215.5,215.5L4,454.08a13.46,13.46,0,0,0,0,19.1,13.59,13.59,0,0,0,9.5,4,13.17,13.17,0,0,0,9.5-4l225.1-225.1A13.43,13.43,0,0,0,248.18,229.08Z"/>
+            <path class="arrow_3" d="M752.3,229.08,527.2,4a13.51,13.51,0,1,0-19.1,19.1l215.5,215.5L508.1,454.08a13.55,13.55,0,0,0,9.5,23.1,13.17,13.17,0,0,0,9.5-4l225.1-225.1A13.43,13.43,0,0,0,752.3,229.08Z"/>
+          </g>
+        </svg>
+        <div id="document" class="input-wrap my_scan disabled">
+          <label for="id">
+            <img width="40px" src="{{ url_for('static', filename='icons/id-card.svg') }}" alt="">
+            <i data-message="Загрузите изображение вашего документа" class="filename">Загрузите изображение вашего документа</i>
+          </label>
+          <input disabled="disabled" class="inputfile" type="file" id="id" name="id">
+          <div class="info-wrap">
+            <i>*</i>Распознаем ID-карты Кыргызской Республики
+          </div>
+        </div>
+        <svg class="arrows" id="arrows_dock" xmlns="http://www.w3.org/2000/svg" width="50px" viewBox="0 0 756.19 477.18">
+          <g id="Capa_1" data-name="Capa 1">
+            <path class="arrow_1" d="M500.24,229.08,275.14,4A13.51,13.51,0,0,0,256,23.08l215.5,215.5L256,454.08a13.55,13.55,0,0,0,9.5,23.1,13.17,13.17,0,0,0,9.5-4l225.1-225.1A13.43,13.43,0,0,0,500.24,229.08Z"/>
+            <path class="arrow_2" d="M248.18,229.08,23.08,4A13.51,13.51,0,1,0,4,23.08l215.5,215.5L4,454.08a13.46,13.46,0,0,0,0,19.1,13.59,13.59,0,0,0,9.5,4,13.17,13.17,0,0,0,9.5-4l225.1-225.1A13.43,13.43,0,0,0,248.18,229.08Z"/>
+            <path class="arrow_3" d="M752.3,229.08,527.2,4a13.51,13.51,0,1,0-19.1,19.1l215.5,215.5L508.1,454.08a13.55,13.55,0,0,0,9.5,23.1,13.17,13.17,0,0,0,9.5-4l225.1-225.1A13.43,13.43,0,0,0,752.3,229.08Z"/>
+          </g>
+        </svg>
+        <div class="submit disabled">
+          <label for="submit_btn">
+            <span class="icon-wrap">
+              <img class="submit_icon" width="40px" src="{{ url_for('static', filename='icons/icon_reload.svg') }}" alt="">
+            </span>
+            <i>Отправить в ИИ</i>
+          </label>
+          <input type="submit" class="inputfile" disabled="disabled" id="submit_btn">
+        </div>
+      </form>
+      {% if result %}
+      <div class="results">
+        <div class="results-images">
+          <div class="results-images--item-wrap">
+            <img src="/{{ result['Match']['face'] }}">
+          </div>
+
+
+          <div class="results-info">
+            Совпадение <span><i class="match-percent">{{ result['Match']['percentage'] }}</i><i>%</i></span>
+          </div>
+
+          <div class="results-images--item-wrap">
+            <img src="/{{ result['Match']['idcard'] }}">
+          </div>
+
+        </div>
+        <div class="results-code">
+          <div class="title">Распознанные данные:</div>
+          <div class="results-code--wrap">
+            <div class="inst">
+              <div class="inst-info--console">
+                <div class="inst-info--console_header">
+                  <span class="close"></span>
+                  <span class="minimize"></span>
+                  <span class="maximize"></span>
+                </div>
+                <div class="code-snippet__content">
+                  {% include 'demo_result.html' %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </section>
+    <main>
+      <section>
+	<div class="title">
+	  Идентификация личности
+	  <img src="{{ url_for('static', filename='icons/line.svg') }}" alt="">
+	</div>
+	<div class="ident-info">
+	  <div class="ident-info-text">
+            Одна из самых критичных операций у финансовых организаций/страховых компаний/брокеров/государства это идентификация личности. Особенно сейчас, когда локальный офис заменяется Интернетом и клиенту вообще не требуется никуда ходить, все решается через приложение или вебсайт. Однако, на стороне бизнеса процесс идентификации все равно проводится полностью человеком. Наш сервис призван решить это проблему и помочь оператору быстрее принимать решения по инентификации (нейросеть сравнивания лиц) и меньше времени тратить на заполнение данных с фотографий (система распознавания текста с id-карты).
+	  </div>
+	  <div class="ident-info-prev">
+            <img src="{{ url_for('static', filename='icons/card_matrix.png') }}" alt="">
+	  </div>
+	</div>
+      </section>
+    </main>
+    <section class="information-text">
+      <div class="title">
+	Удобное решение для специалистов
+	<img src="{{ url_for('static', filename='icons/line.svg') }}" alt="">
+      </div>
+      <p>
+	Более того, мы не пилим огромный комбайн, программно-апаратный комплекс и сложный интерфейс. Мы предоставляем веб-API, которое можно легко встроить в уже работающие системы небольшими силами IT-отдела организации. В будущем мы планируем брать небольшую плату за 1000 обращений, а сейчас система абсолютно бесплатна и мы готовы вместе с ранними последователями ее совместно улучшать и модифицировать.
+      </p>
+      <p class="inform-it-text">Сейчас мы распознаем id-карты Кыргызской Республики и работаем над Казахстаном, Россией и Сингапуром</p>
+    </section>
+    <div class="full-width-section">
+      <section class="information">
+	<div class="title">
+	  Смотрите, чтобы было понятнее, наше API можно встроить в:
+	  <img src="{{ url_for('static', filename='icons/line.svg') }}" alt="">
+	</div>
+	<div class="information-icons--wrap">
+	  <div class="information-icons--item">
+            <div class="item-icon">
+	      <img src="{{ url_for('static', filename='icons/icon_bank.svg') }}" alt="">
+            </div>
+            <i>в интернет банкинг</i>
+	  </div>
+	  <div class="information-icons--item">
+            <div class="item-icon">
+	      <img src="{{ url_for('static', filename='icons/icon_mobile.svg') }}" alt="">
+            </div>
+            <i>мобильные приложения по выдаче экспресс кредитов</i>
+	  </div>
+	  <div class="information-icons--item">
+            <div class="item-icon">
+	      <img src="{{ url_for('static', filename='icons/icon_uber.svg') }}" alt="">
+            </div>
+            <i>в приложения для идентификации водителей UBER-like сервисов</i>
+	  </div>
+	  <div class="information-icons--item">
+            <div class="item-icon">
+	      <img src="{{ url_for('static', filename='icons/icon_scan.svg') }}" alt="">
+            </div>
+            <i>в систему регистрации юридических лиц на сайте государства</i>
+	  </div>
+	</div>
+      </section>
+    </div>
+    <div class="modal" id="takePhoto" style="display: none">
+      <div class="modal-body">
+	<button type="button" id="close_modal">
+	  <svg width="16" version="1.1" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 64 64">
+            <g>
+	      <path d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/>
+            </g>
+	  </svg>
+	</button>
+	<div class="camera">
+	  <video id="video">Video stream not available.</video>
+	  <canvas id="canvas" class=""></canvas>
+	</div>
+	<div class="buttons">
+	  <button class="cam_btn" id="cancel">
+            <img width="18px" src="{{ url_for('static', filename='icons/icon_cancel.svg') }}" alt="\">
+	  </button>
+	  <button class="cam_btn" id="startbutton">
+            <img src="{{ url_for('static', filename='icons/icon-camera.svg') }}" alt="\">
+	  </button>
+	  <button class="cam_btn" id="apply">
+            <img width="18px" src="{{ url_for('static', filename='icons/icon_apply.svg') }}" alt="\">
+	  </button>
+	</div>
+      </div>
+    </div>
+    <footer id="contacts">
+      <section>
+	<div class="footer-information">
+	  Пока что это хобби проект внутри <a href="https://maddevs.io/" target="_blank">Mad Devs</a>. По всем вопросам пишите на
+	  <a target="_blank" href="mailto:rock@maddevs.io">rock@maddevs.io</a>
+	</div>
+      </section>
+      <script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+      <script src="{{ url_for('static', filename='js/typed.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    </footer>
+  </body>
+</html>

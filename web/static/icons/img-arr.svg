@@ -1,0 +1,12 @@
+<svg version="1.1"
+	 xmlns="http://www.w3.org/2000/svg"
+	 x="0px" y="0px" width="46px" height="58px" viewBox="-1.108 -1 46 58" enable-background="new -1.108 -1 46 58"
+	 xml:space="preserve">
+<defs>
+</defs>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0" y1="28" x2="43.333" y2="28">
+	<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0.17"/>
+	<stop  offset="1" style="stop-color:#FFFFFF"/>
+</linearGradient>
+<polygon opacity="0.27" fill="url(#SVGID_1_)" points="22.08,0 0.001,0 21.252,28 0,56 22.08,56 43.333,28 "/>
+</svg>
