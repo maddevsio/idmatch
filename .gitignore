@@ -1,0 +1,13 @@
+*.pyc
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+__pycache__
+node_modules/
+uploads/*.jpg
+uploads/*.png
