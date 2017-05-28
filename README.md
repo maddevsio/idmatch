@@ -97,7 +97,7 @@ pip install -r requirements.txt
 Command line interface:
 ```
 # Running CLI
-$ ./cli.py --img /home/s0b0lev/maddevs/idmatchpy/fixtures/faces/belek.png 
+$ ./cli.py --img <path/to/image>
 $ ./cli.py --help
 ```
 
