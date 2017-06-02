@@ -27,7 +27,7 @@ def idmatch_landing():
 @app.route('/', methods=['POST'])
 def idmatch_landing_demo():
     result = {}
-    if 'faceWebcam' not in request.form:
+    if 'faceWebcam' in request.form and not request.form['faceWebcam']:
         face = save_file(request.files['face'])
     else:
         face = save_webcam(request.form['faceWebcam'])
@@ -59,7 +59,7 @@ def save_file(request_file):
 def save_webcam(webcam_image):
     webcam_image = webcam_image.replace('data:image/png;base64,', '')
     now = datetime.datetime.now()
-    filefname = "webcam-%s.jpg" % str(now.strftime("%Y-%m-%d-%H:%M:%S"))
+    filename = "webcam-%s.jpg" % str(now.strftime("%Y-%m-%d-%H:%M:%S"))
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     with open(file_path, "wb") as fh:
         fh.write(webcam_image.decode('base64'))
