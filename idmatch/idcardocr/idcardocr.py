@@ -80,6 +80,7 @@ def recognize_card(original_image, country='kg', preview=False):
                 result.append(item)
                 cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
     if preview:
+        original_image = original_image.split('/')[-1]
         location = save_image('regions' + original_image, idcard)
         return location, regionskir(result)
     return regionskir(result)
