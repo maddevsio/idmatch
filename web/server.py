@@ -1,4 +1,5 @@
 # coding: utf-8
+import datetime
 import json
 import os
 import sys
@@ -26,13 +27,16 @@ def idmatch_landing():
 @app.route('/', methods=['POST'])
 def idmatch_landing_demo():
     result = {}
-    face = save_file(request.files['face'])
+    if 'faceWebcam' not in request.form:
+        face = save_file(request.files['face'])
+    else:
+        face = save_webcam(request.form['faceWebcam'])
     idcard = save_file(request.files['id'])
     result['Match'] = match(face, idcard, preview=True)
     result['Match']['percentage'] = int(result['Match']['percentage'])
     result['Match']['face'] = "/".join(result['Match']['face'].split("/")[-2:])
     image, result['OCR'] = recognize_card(idcard, preview=True)
-    result['Match']['idcard'] = 'static/' + "/".join(image.split("/")[-2:])
+    result['Match']['idcard'] = "/".join(image.split("/")[-2:])
     return render_template('idmatch_landing.html', **locals())
 
 
@@ -50,6 +54,15 @@ def save_file(request_file):
     filename = secure_filename(request_file.filename)
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     request_file.save(file_path)
+    return file_path
+
+def save_webcam(webcam_image):
+    webcam_image = webcam_image.replace('data:image/png;base64,', '')
+    now = datetime.datetime.now()
+    filefname = "webcam-%s.jpg" % str(now.strftime("%Y-%m-%d-%H:%M:%S"))
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    with open(file_path, "wb") as fh:
+        fh.write(webcam_image.decode('base64'))
     return file_path
 
 
