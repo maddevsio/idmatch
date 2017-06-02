@@ -37,7 +37,6 @@ def idmatch_landing_demo():
     result['Match']['face'] = "/".join(result['Match']['face'].split("/")[-2:])
     image, result['OCR'] = recognize_card(idcard, preview=True)
     result['Match']['idcard'] = "/".join(image.split("/")[-2:])
-    print(result['Match']['idcard'])
     return render_template('idmatch_landing.html', **locals())
 
 
@@ -58,9 +57,9 @@ def save_file(request_file):
     return file_path
 
 def save_webcam(webcam_image):
-    # or, more concisely using with statement
     webcam_image = webcam_image.replace('data:image/png;base64,', '')
-    filename = "webcam-%s.jpg" % str(datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S"))
+    now = datetime.datetime.now()
+    filefname = "webcam-%s.jpg" % str(now.strftime("%Y-%m-%d-%H:%M:%S"))
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     with open(file_path, "wb") as fh:
         fh.write(webcam_image.decode('base64'))
