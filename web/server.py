@@ -4,6 +4,7 @@ import json
 import os
 import sys
 from flask import Flask, Response, render_template, request
+from flask_babel import Babel
 from werkzeug.utils import secure_filename
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,6 +18,13 @@ UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+babel = Babel(app)
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(['ru', 'en'])
+
 
 
 @app.route('/', methods=['GET'])

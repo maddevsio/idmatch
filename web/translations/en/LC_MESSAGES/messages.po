@@ -1,0 +1,170 @@
+# English translations for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-06-07 01:00+0600\n"
+"PO-Revision-Date: 2017-06-07 01:01+0600\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: templates/idmatch_landing.html:16
+msgid ""
+"IDMATCH &mdash; Машинное обучение на службе у финансовых "
+"организаций/страховых компаний/брокеров/государства"
+msgstr "Machine learning serving FinTech/insurance/brokers/authorities"
+
+#: templates/idmatch_landing.html:43
+msgid "Контакты"
+msgstr "Contacts"
+
+#: templates/idmatch_landing.html:48
+msgid "Машинное обучение на службе у"
+msgstr "Machine learning serving"
+
+#: templates/idmatch_landing.html:50
+msgid "финтеха"
+msgstr "FinTech"
+
+#: templates/idmatch_landing.html:51 templates/idmatch_landing.html:54
+msgid "страхования"
+msgstr "insurance"
+
+#: templates/idmatch_landing.html:52 templates/idmatch_landing.html:55
+msgid "брокеров"
+msgstr "brokers"
+
+#: templates/idmatch_landing.html:53
+msgid "государства"
+msgstr "authorities"
+
+#: templates/idmatch_landing.html:58
+msgid "Машинное обучение на службе у финтеха"
+msgstr "Machine learning serving FinTech"
+
+#: templates/idmatch_landing.html:60
+msgid ""
+"Наше API принимет изображение лица и изображение паспорта (айди карты) "
+"человека, а на выходе выдает процент\n"
+"          матчинга лица на паспорте и распознанный текст с паспорта в "
+"формате JSON"
+msgstr "Our API takes a picture of a person's face and a picture of the person's passport (ID card) and produces matching percentage and recognized text from the passport in the JSON format"
+
+#: templates/idmatch_landing.html:84
+msgid ""
+"Процент совпадения лица на фотографии и\n"
+"                  распознаный текст с ID карты\n"
+"                  в JSON"
+msgstr "Face matching percentage and recognized ID card text in JSON"
+
+#: templates/idmatch_landing.html:95
+msgid "Посмотрите как это работает"
+msgstr "See the way it works"
+
+#: templates/idmatch_landing.html:100
+msgid "Загрузите вашу фотографию"
+msgstr "Upload your picture"
+
+#: templates/idmatch_landing.html:105
+msgid "или"
+msgstr "or"
+
+#: templates/idmatch_landing.html:107
+msgid "сделайте фотографию"
+msgstr "take a picture"
+
+#: templates/idmatch_landing.html:136
+msgid "Загрузите изображение вашего документа"
+msgstr "Upload an image of your document"
+
+#: templates/idmatch_landing.html:140
+msgid "Распознаем ID-карты Кыргызской Республики"
+msgstr "We recognize Kyrgyz Republic ID cards"
+
+#: templates/idmatch_landing.html:155
+msgid "Отправить в ИИ"
+msgstr "Send to AI"
+
+#: templates/idmatch_landing.html:169
+msgid "Совпадение"
+msgstr "Identification"
+
+#: templates/idmatch_landing.html:178
+msgid "Распознанные данные:"
+msgstr ""
+
+#: templates/idmatch_landing.html:200
+msgid "Идентификация личности"
+msgstr "Identification"
+
+#: templates/idmatch_landing.html:205
+msgid ""
+"Одна из самых критичных операций у финансовых организаций/страховых "
+"компаний/брокеров/государства это идентификация личности. Особенно "
+"сейчас, когда локальный офис заменяется Интернетом и клиенту вообще не "
+"требуется никуда ходить, все решается через приложение или вебсайт. "
+"Однако, на стороне бизнеса процесс идентификации все равно проводится "
+"полностью человеком. Наш сервис призван решить это проблему и помочь "
+"оператору быстрее принимать решения по инентификации (нейросеть "
+"сравнивания лиц) и меньше времени тратить на заполнение данных с "
+"фотографий (система распознавания текста с id-карты)"
+msgstr "One of the most critical operations that financial organizations/insurance companies/brokers/authorities need to perform is person identification. Especially now that physical offices get replaced with the Internet, and clients don't have to go anywhere at all: everything gets solved via apps or websites. However, on the business side, the identification process is still fully carried out by humans. Our service will solve this problem and help operators make faster ID decisions (neural networks for face comparison) and spend less time filling in the data from photographs (ID card text recognition system)."
+
+#: templates/idmatch_landing.html:215
+msgid "Удобное решение для специалистов"
+msgstr "A convenient solution for specialists"
+
+#: templates/idmatch_landing.html:219
+msgid ""
+"Более того, мы не пилим огромный комбайн, программно-апаратный комплекс и"
+" сложный интерфейс. Мы предоставляем веб-API, которое можно легко "
+"встроить в уже работающие системы небольшими силами IT-отдела "
+"организации. В будущем мы планируем брать небольшую плату за 1000 "
+"обращений, а сейчас система абсолютно бесплатна и мы готовы вместе с "
+"ранними последователями ее совместно улучшать и модифицировать."
+msgstr "Moreover, we're not making a collider with a hardware-software complex and complicated interface. We provide an API that can be easily integrated into existing systems with a humble effort made by an organization's IT department. In the future, we're planning to charge a small fee for 1,000 requests, but now the system is totally free, and we are ready to work with early adopters to improve and modify it together"
+
+#: templates/idmatch_landing.html:221
+msgid ""
+"Сейчас мы распознаем id-карты Кыргызской Республики и работаем над "
+"Казахстаном, Россией и Сингапуром"
+msgstr "We currently recognize Kyrgyz Republic ID cards, and we're working on Kazakhstan, Russia, and Singapore"
+
+#: templates/idmatch_landing.html:226
+msgid "Смотрите, чтобы было понятнее, наше API можно встроить в:"
+msgstr "See, just for clarity: our API can be integrated into"
+
+#: templates/idmatch_landing.html:234
+msgid "в интернет банкинг"
+msgstr "Internet banking"
+
+#: templates/idmatch_landing.html:240
+msgid "мобильные приложения по выдаче экспресс кредитов"
+msgstr "fast loan mobile applications"
+
+#: templates/idmatch_landing.html:246
+msgid "в приложения для идентификации водителей UBER-like сервисов"
+msgstr "UBER-like driver identification applications"
+
+#: templates/idmatch_landing.html:252
+msgid "в систему регистрации юридических лиц на сайте государства"
+msgstr "corporate body registration systems on public authorities' websites"
+
+#: templates/idmatch_landing.html:286
+msgid "Пока что это хобби проект внутри"
+msgstr "So far this is a hobby project within"
+
+#: templates/idmatch_landing.html:286
+msgid "По всем вопросам пишите на"
+msgstr "For any questions, email to "
+
