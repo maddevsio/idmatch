@@ -1,0 +1,169 @@
+# Translations template for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-06-07 01:00+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: templates/idmatch_landing.html:16
+msgid ""
+"IDMATCH &mdash; Машинное обучение на службе у финансовых "
+"организаций/страховых компаний/брокеров/государства"
+msgstr ""
+
+#: templates/idmatch_landing.html:43
+msgid "Контакты"
+msgstr ""
+
+#: templates/idmatch_landing.html:48
+msgid "Машинное обучение на службе у"
+msgstr ""
+
+#: templates/idmatch_landing.html:50
+msgid "финтеха"
+msgstr ""
+
+#: templates/idmatch_landing.html:51 templates/idmatch_landing.html:54
+msgid "страхования"
+msgstr ""
+
+#: templates/idmatch_landing.html:52 templates/idmatch_landing.html:55
+msgid "брокеров"
+msgstr ""
+
+#: templates/idmatch_landing.html:53
+msgid "государства"
+msgstr ""
+
+#: templates/idmatch_landing.html:58
+msgid "Машинное обучение на службе у финтеха"
+msgstr ""
+
+#: templates/idmatch_landing.html:60
+msgid ""
+"Наше API принимет изображение лица и изображение паспорта (айди карты) "
+"человека, а на выходе выдает процент\n"
+"          матчинга лица на паспорте и распознанный текст с паспорта в "
+"формате JSON"
+msgstr ""
+
+#: templates/idmatch_landing.html:84
+msgid ""
+"Процент совпадения лица на фотографии и\n"
+"                  распознаный текст с ID карты\n"
+"                  в JSON"
+msgstr ""
+
+#: templates/idmatch_landing.html:95
+msgid "Посмотрите как это работает"
+msgstr ""
+
+#: templates/idmatch_landing.html:100
+msgid "Загрузите вашу фотографию"
+msgstr ""
+
+#: templates/idmatch_landing.html:105
+msgid "или"
+msgstr ""
+
+#: templates/idmatch_landing.html:107
+msgid "сделайте фотографию"
+msgstr ""
+
+#: templates/idmatch_landing.html:136
+msgid "Загрузите изображение вашего документа"
+msgstr ""
+
+#: templates/idmatch_landing.html:140
+msgid "Распознаем ID-карты Кыргызской Республики"
+msgstr ""
+
+#: templates/idmatch_landing.html:155
+msgid "Отправить в ИИ"
+msgstr ""
+
+#: templates/idmatch_landing.html:169
+msgid "Совпадение"
+msgstr ""
+
+#: templates/idmatch_landing.html:178
+msgid "Распознанные данные:"
+msgstr ""
+
+#: templates/idmatch_landing.html:200
+msgid "Идентификация личности"
+msgstr ""
+
+#: templates/idmatch_landing.html:205
+msgid ""
+"Одна из самых критичных операций у финансовых организаций/страховых "
+"компаний/брокеров/государства это идентификация личности. Особенно "
+"сейчас, когда локальный офис заменяется Интернетом и клиенту вообще не "
+"требуется никуда ходить, все решается через приложение или вебсайт. "
+"Однако, на стороне бизнеса процесс идентификации все равно проводится "
+"полностью человеком. Наш сервис призван решить это проблему и помочь "
+"оператору быстрее принимать решения по инентификации (нейросеть "
+"сравнивания лиц) и меньше времени тратить на заполнение данных с "
+"фотографий (система распознавания текста с id-карты)"
+msgstr ""
+
+#: templates/idmatch_landing.html:215
+msgid "Удобное решение для специалистов"
+msgstr ""
+
+#: templates/idmatch_landing.html:219
+msgid ""
+"Более того, мы не пилим огромный комбайн, программно-апаратный комплекс и"
+" сложный интерфейс. Мы предоставляем веб-API, которое можно легко "
+"встроить в уже работающие системы небольшими силами IT-отдела "
+"организации. В будущем мы планируем брать небольшую плату за 1000 "
+"обращений, а сейчас система абсолютно бесплатна и мы готовы вместе с "
+"ранними последователями ее совместно улучшать и модифицировать."
+msgstr ""
+
+#: templates/idmatch_landing.html:221
+msgid ""
+"Сейчас мы распознаем id-карты Кыргызской Республики и работаем над "
+"Казахстаном, Россией и Сингапуром"
+msgstr ""
+
+#: templates/idmatch_landing.html:226
+msgid "Смотрите, чтобы было понятнее, наше API можно встроить в:"
+msgstr ""
+
+#: templates/idmatch_landing.html:234
+msgid "в интернет банкинг"
+msgstr ""
+
+#: templates/idmatch_landing.html:240
+msgid "мобильные приложения по выдаче экспресс кредитов"
+msgstr ""
+
+#: templates/idmatch_landing.html:246
+msgid "в приложения для идентификации водителей UBER-like сервисов"
+msgstr ""
+
+#: templates/idmatch_landing.html:252
+msgid "в систему регистрации юридических лиц на сайте государства"
+msgstr ""
+
+#: templates/idmatch_landing.html:286
+msgid "Пока что это хобби проект внутри"
+msgstr ""
+
+#: templates/idmatch_landing.html:286
+msgid "По всем вопросам пишите на"
+msgstr ""
+
