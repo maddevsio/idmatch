@@ -13,7 +13,7 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="description" content="API которое распознает данные на ID-карточках и сравнивает лица">
 
-    <title>IDMATCH &mdash; Машинное обучение на службе у финансовых организаций/страховых компаний/брокеров/государства</title>
+    <title>{{ _('IDMATCH &mdash; Машинное обучение на службе у финансовых организаций/страховых компаний/брокеров/государства') }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='dist/styles.css') }}">
   </head>
   <body>
@@ -40,25 +40,25 @@
           </a>
           <ul style="padding-right: 100px;">
             <li class="menu-wrap--item">
-              <a href="#contacts">Контакты</a>
+              <a href="#contacts">{{ _('Контакты') }}</a>
             </li>
           </ul>
         </div>
         <h1 class="text-wrapper">
-          Машинное обучение на службе у&nbsp;
+          {{ _('Машинное обучение на службе у') }}&nbsp;
           <div class="animated-words">
-            <span>финтеха</span>
-            <span>страхования</span>
-            <span>брокеров</span>
-            <span>государства</span>
-            <span>страхования</span>
-            <span>брокеров</span>
+            <span>{{ _('финтеха') }}</span>
+            <span>{{ _('страхования') }}</span>
+            <span>{{ _('брокеров') }}</span>
+            <span>{{ _('государства') }}</span>
+            <span>{{ _('страхования') }}</span>
+            <span>{{ _('брокеров') }}</span>
           </div>
         </h1>
-        <h1 class="mobile-title">Машинное обучение на службе у финтеха</h1>
+        <h1 class="mobile-title">{{ _('Машинное обучение на службе у финтеха') }}</h1>
         <div class="description">
-          Наше API принимет изображение лица и изображение паспорта (айди карты) человека, а на выходе выдает процент
-          матчинга лица на паспорте и распознанный текст с паспорта в формате JSON
+          {{ _('Наше API принимет изображение лица и изображение паспорта (айди карты) человека, а на выходе выдает процент
+          матчинга лица на паспорте и распознанный текст с паспорта в формате JSON') }}
         </div>
         <div id="terminal">
           <div id="typed-strings">
@@ -81,9 +81,9 @@
                   <img class="place-bg" srcset="{{ url_for('static', filename='icons/card.png') }}" alt="My default image">
                 </div>
                 <div class="inst-info-text">
-                  Процент совпадения лица на фотографии и
+                  {{ _('Процент совпадения лица на фотографии и
                   распознаный текст с ID карты
-                  в JSON
+                  в JSON') }}
                 </div>
               </div>
             </div>
@@ -92,19 +92,19 @@
       </section>
     </header>
     <section id="form-result">
-      <div class="title">Посмотрите как это работает</div>
+      <div class="title">{{ _('Посмотрите как это работает') }}</div>
       <form class="documents-form" method="POST" enctype="multipart/form-data" action="/#form-result">
         <div id="photo" class="input-wrap my_photo">
           <label for="face">
             <img width="40px" src="{{ url_for('static', filename='icons/cloud-computing.svg') }}" alt="">
-            <i data-message="Загрузите вашу фотографию" class="filename">Загрузите вашу фотографию</i>
+            <i data-message="Загрузите вашу фотографию" class="filename">{{ _('Загрузите вашу фотографию') }}</i>
           </label>
           <input class="inputfile" type="file" id="face" name="face">
           <div class="webcam_btn">
             <input name="faceWebcam" type="hidden" id="webcam-face">
-            <i class="or">или</i>
+            <i class="or">{{ _('или') }}</i>
             <button type="button" id="open_takePhoto">
-              <span>сделайте фотографию
+              <span>{{ _('сделайте фотографию') }}
                 <svg version="1.1" id="Capa_1" width="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
                   <g>
                     <path d="M55.201,15.5h-8.524l-4-10H17.323l-4,10H12v-5H6v5H4.799C2.152,15.5,0,17.652,0,20.299v29.368
@@ -133,11 +133,11 @@
         <div id="document" class="input-wrap my_scan disabled">
           <label for="id">
             <img width="40px" src="{{ url_for('static', filename='icons/id-card.svg') }}" alt="">
-            <i data-message="Загрузите изображение вашего документа" class="filename">Загрузите изображение вашего документа</i>
+            <i data-message="{{ _('Загрузите изображение вашего документа') }}" class="filename">{{ _('Загрузите изображение вашего документа') }}</i>
           </label>
           <input disabled="disabled" class="inputfile" type="file" id="id" name="id">
           <div class="info-wrap">
-            <i>*</i>Распознаем ID-карты Кыргызской Республики
+            <i>*</i>{{ _('Распознаем ID-карты Кыргызской Республики') }}
           </div>
         </div>
         <svg class="arrows" id="arrows_dock" xmlns="http://www.w3.org/2000/svg" width="50px" viewBox="0 0 756.19 477.18">
@@ -152,7 +152,7 @@
             <span class="icon-wrap">
               <img class="submit_icon" width="40px" src="{{ url_for('static', filename='icons/icon_reload.svg') }}" alt="">
             </span>
-            <i>Отправить в ИИ</i>
+            <i>{{ _('Отправить в ИИ') }}</i>
           </label>
           <input type="submit" class="inputfile" disabled="disabled" id="submit_btn">
         </div>
@@ -166,7 +166,7 @@
 
 
           <div class="results-info">
-            Совпадение <span><i class="match-percent">{{ result['Match']['percentage'] }}</i><i>%</i></span>
+            {{ _('Совпадение') }} <span><i class="match-percent">{{ result['Match']['percentage'] }}</i><i>%</i></span>
           </div>
 
           <div class="results-images--item-wrap">
@@ -175,7 +175,7 @@
 
         </div>
         <div class="results-code">
-          <div class="title">Распознанные данные:</div>
+          <div class="title">{{ _('Распознанные данные:') }}</div>
           <div class="results-code--wrap">
             <div class="inst">
               <div class="inst-info--console">
@@ -197,12 +197,12 @@
     <main>
       <section>
 	<div class="title">
-	  Идентификация личности
+	  {{ _('Идентификация личности') }}
 	  <img src="{{ url_for('static', filename='icons/line.svg') }}" alt="">
 	</div>
 	<div class="ident-info">
 	  <div class="ident-info-text">
-            Одна из самых критичных операций у финансовых организаций/страховых компаний/брокеров/государства это идентификация личности. Особенно сейчас, когда локальный офис заменяется Интернетом и клиенту вообще не требуется никуда ходить, все решается через приложение или вебсайт. Однако, на стороне бизнеса процесс идентификации все равно проводится полностью человеком. Наш сервис призван решить это проблему и помочь оператору быстрее принимать решения по инентификации (нейросеть сравнивания лиц) и меньше времени тратить на заполнение данных с фотографий (система распознавания текста с id-карты).
+            {{ _('Одна из самых критичных операций у финансовых организаций/страховых компаний/брокеров/государства это идентификация личности. Особенно сейчас, когда локальный офис заменяется Интернетом и клиенту вообще не требуется никуда ходить, все решается через приложение или вебсайт. Однако, на стороне бизнеса процесс идентификации все равно проводится полностью человеком. Наш сервис призван решить это проблему и помочь оператору быстрее принимать решения по инентификации (нейросеть сравнивания лиц) и меньше времени тратить на заполнение данных с фотографий (система распознавания текста с id-карты)') }}.
 	  </div>
 	  <div class="ident-info-prev">
             <img src="{{ url_for('static', filename='icons/card_matrix.png') }}" alt="">
@@ -212,18 +212,18 @@
     </main>
     <section class="information-text">
       <div class="title">
-	Удобное решение для специалистов
+	{{ _('Удобное решение для специалистов') }}
 	<img src="{{ url_for('static', filename='icons/line.svg') }}" alt="">
       </div>
       <p>
-	Более того, мы не пилим огромный комбайн, программно-апаратный комплекс и сложный интерфейс. Мы предоставляем веб-API, которое можно легко встроить в уже работающие системы небольшими силами IT-отдела организации. В будущем мы планируем брать небольшую плату за 1000 обращений, а сейчас система абсолютно бесплатна и мы готовы вместе с ранними последователями ее совместно улучшать и модифицировать.
+	{{ _('Более того, мы не пилим огромный комбайн, программно-апаратный комплекс и сложный интерфейс. Мы предоставляем веб-API, которое можно легко встроить в уже работающие системы небольшими силами IT-отдела организации. В будущем мы планируем брать небольшую плату за 1000 обращений, а сейчас система абсолютно бесплатна и мы готовы вместе с ранними последователями ее совместно улучшать и модифицировать.') }}
       </p>
-      <p class="inform-it-text">Сейчас мы распознаем id-карты Кыргызской Республики и работаем над Казахстаном, Россией и Сингапуром</p>
+      <p class="inform-it-text">{{ _('Сейчас мы распознаем id-карты Кыргызской Республики и работаем над Казахстаном, Россией и Сингапуром') }}</p>
     </section>
     <div class="full-width-section">
       <section class="information">
 	<div class="title">
-	  Смотрите, чтобы было понятнее, наше API можно встроить в:
+	  {{ _('Смотрите, чтобы было понятнее, наше API можно встроить в:') }}
 	  <img src="{{ url_for('static', filename='icons/line.svg') }}" alt="">
 	</div>
 	<div class="information-icons--wrap">
@@ -231,25 +231,25 @@
             <div class="item-icon">
 	      <img src="{{ url_for('static', filename='icons/icon_bank.svg') }}" alt="">
             </div>
-            <i>в интернет банкинг</i>
+            <i>{{ _('в интернет банкинг') }}</i>
 	  </div>
 	  <div class="information-icons--item">
             <div class="item-icon">
 	      <img src="{{ url_for('static', filename='icons/icon_mobile.svg') }}" alt="">
             </div>
-            <i>мобильные приложения по выдаче экспресс кредитов</i>
+            <i>{{ _('мобильные приложения по выдаче экспресс кредитов') }}</i>
 	  </div>
 	  <div class="information-icons--item">
             <div class="item-icon">
 	      <img src="{{ url_for('static', filename='icons/icon_uber.svg') }}" alt="">
             </div>
-            <i>в приложения для идентификации водителей UBER-like сервисов</i>
+            <i>{{ _('в приложения для идентификации водителей UBER-like сервисов') }}</i>
 	  </div>
 	  <div class="information-icons--item">
             <div class="item-icon">
 	      <img src="{{ url_for('static', filename='icons/icon_scan.svg') }}" alt="">
             </div>
-            <i>в систему регистрации юридических лиц на сайте государства</i>
+            <i>{{ _('в систему регистрации юридических лиц на сайте государства') }}</i>
 	  </div>
 	</div>
       </section>
@@ -283,7 +283,7 @@
     <footer id="contacts">
       <section>
 	<div class="footer-information">
-	  Пока что это хобби проект внутри <a href="https://maddevs.io/" target="_blank">Mad Devs</a>. По всем вопросам пишите на
+	  {{_('Пока что это хобби проект внутри')}} <a href="https://maddevs.io/" target="_blank">Mad Devs</a>. {{ _('По всем вопросам пишите на') }}
 	  <a target="_blank" href="mailto:rock@maddevs.io">rock@maddevs.io</a>
 	</div>
       </section>
