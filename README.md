@@ -26,7 +26,7 @@ $ wget https://github.com/opencv/opencv_contrib/archive/3.2.0.tar.gz
 $ cd opencv-3.2.0
 $ mkdir build
 $ cd build
-$ cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/  ..
+$ cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/ -D BUILD_PYTHON_SUPPORT=ON ..
 $ make -j3
 $ sudo make install
 ```
