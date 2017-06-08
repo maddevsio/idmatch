@@ -12,7 +12,6 @@ Pillow==4.0.0
 protobuf==3.3.0
 pyliblzma==0.5.3
 pyparsing==2.2.0
-Pyste==0.9.10
 pytesseract==0.1.6
 python-dateutil==2.6.0
 python-gflags==3.1.1

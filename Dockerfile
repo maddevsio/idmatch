@@ -1,27 +1,68 @@
 FROM ubuntu:16.04
 
-RUN apt-get update
-RUN apt-get install -y -q wget curl
-RUN apt-get install -y -q build-essential
-RUN apt-get install -y -q libtool autoconf
-RUN apt-get install -y -q cmake git libgtk2.0-dev pkg-config
-RUN apt-get install -y -q libavcodec-dev libavformat-dev libswscale-dev
-RUN apt-get install -y -q python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev
-RUN apt-get install -y -q libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
-RUN apt-get install -y -q python2.7 python2.7-dev python-pip
-RUN apt-get install -y -q libleptonica-dev
-RUN apt-get install -y -q tesseract-ocr
-RUN apt-get install -y -q tesseract-ocr-kir
-RUN pip install cython
-RUN pip install numpy
-ADD build.sh	/build.sh
+MAINTAINER MadDevs <rock@maddevs.io>
 
-RUN /bin/sh /build.sh
-RUN rm -rf /build.sh
-COPY . /webapp
+ENV OPENCV_VER 3.2.0
+ENV SOURCE_URL https://github.com/opencv/opencv/archive/${OPENCV_VER}.tar.gz
+ENV CONTRIB_URL https://github.com/opencv/opencv_contrib/archive/${OPENCV_VER}.tar.gz
+
+RUN set -ex \
+  && apt-get update \
+	&& apt-get install --no-install-recommends -y \
+          build-essential \
+          libtool \
+          autoconf \
+          automake \
+          pkg-config \
+          cmake \
+          curl \
+          libtbb2 \
+          libdc1394-22-dev \
+          libdc1394-22-dev \
+          libleptonica-dev \
+          libgtk2.0-dev \
+          libavcodec-dev \
+          libavformat-dev \
+          libswscale-dev \
+          libtbb-dev \
+          libjpeg-dev \
+          libpng-dev \
+          libtiff-dev \
+          libjasper-dev \
+          libtesseract-dev \
+          tesseract-ocr \
+          tesseract-ocr-eng \
+          tesseract-ocr-rus \
+          tesseract-ocr-kir \
+          python2.7-dev \
+          python-pip \
+          python-setuptools \
+  && pip install --upgrade pip \
+  && pip install Cython==0.25.2 \
+  && pip install numpy==1.11.0 \
+  && mkdir -p /tmp/opencv/build /tmp/opencv_contrib \
+  && curl -Ls ${SOURCE_URL} | tar -xz --strip=1 -C /tmp/opencv \
+  && curl -Ls ${CONTRIB_URL} | tar -xz --strip=1 -C /tmp/opencv_contrib \
+  && cd /tmp/opencv/build \
+  && cmake \
+      -D CMAKE_BUILD_TYPE=Release \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D BUILD_PYTHON_SUPPORT=ON \
+      -D OPENCV_EXTRA_MODULES_PATH=/tmp/opencv_contrib/modules/ .. \
+  && make -j "$(nproc)" && make install && ldconfig \
+  && cd / && rm -rf /tmp/* \
+  && rm -rf /var/lib/apt/lists/*
+
+ENV UWSGI_CPU_AFFINITY 2
+ENV UWSGI_PROCESSES 4
+ENV UWSGI_HARAKIRI 60
+
 WORKDIR /webapp
+COPY requirements.txt /webapp
 RUN pip install -r requirements.txt
-ENTRYPOINT ["python"]
+COPY . /webapp
 
-CMD ["server.py"]
+WORKDIR /webapp/web
+EXPOSE 8080
 
+CMD ["uwsgi", "--ini", "uwsgi.ini"]
