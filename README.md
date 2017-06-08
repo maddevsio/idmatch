@@ -83,6 +83,12 @@ pip install numpy
 make pycaffe
 ```
 
+Download vgg caffe model
+```
+$ cd idmatch/matching/model/ 
+$ wget http://www.robots.ox.ac.uk/~vgg/software/vgg_face/src/vgg_face_caffe.tar.gz
+$ tar xfvz vgg_face_caffe.tar.gz
+```
 Caffe levels are:
 ```
 0 - debug
