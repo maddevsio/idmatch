@@ -7,9 +7,9 @@ from flask import Flask, Response, render_template, request
 from flask_babel import Babel
 from werkzeug.utils import secure_filename
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
 
-sys.path.insert(1, os.path.join(BASE_DIR, '../idmatch'))
+sys.path.insert(1, BASE_DIR)
 
 from idmatch.matching import match
 from idmatch.idcardocr import recognize_card
