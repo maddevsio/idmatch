@@ -14,7 +14,7 @@ sys.path.insert(1, BASE_DIR)
 from idmatch.matching import match
 from idmatch.idcardocr import recognize_card
 
-UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'web/uploads')
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
