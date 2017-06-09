@@ -93,6 +93,7 @@ WORKDIR /webapp
 COPY requirements.txt /webapp
 RUN pip install -r requirements.txt
 COPY . /webapp
+RUN mkdir -p /webapp/web/uploads
 
 WORKDIR /webapp/web
 EXPOSE 8080
