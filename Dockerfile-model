@@ -1,0 +1,12 @@
+FROM ubuntu:16.04
+
+RUN set -ex \
+  && apt-get update \
+	&& apt-get install --no-install-recommends -y curl \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN set -ex \
+  && mkdir -p /webapp/idmatch/matching/model/ \
+  && curl -Ls http://www.robots.ox.ac.uk/~vgg/software/vgg_face/src/vgg_face_caffe.tar.gz | tar -xz --strip=1 -C /webapp/idmatch/matching/model/
+
+VOLUME /webapp/idmatch/matching/model/
