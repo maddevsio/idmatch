@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
     <meta name="theme-color" content="#ffffff">
     <meta name="description" content="API которое распознает данные на ID-карточках и сравнивает лица">
-    <title>{{ _('IDMATCH &mdash; Машинное обучение на службе у финансовых организаций/страховых компаний/брокеров/государства') }}</title>
+    <title>{{ _('IDMATCH - Машинное обучение на службе у финансовых организаций/страховых компаний/брокеров/государства') }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='dist/styles.css') }}">
   </head>
   <body>
@@ -42,12 +42,12 @@
               <a href="#contacts">{{ _('Контакты') }}</a>
             </li>
             <li class="menu-wrap--item">
-              <a href="">
+              <a href="{{ url_for('idmatch_landing', lang='en') }}">
 		<img src="{{ url_for('static', filename='images/usa.png') }}">
 	      </a>
             </li>
             <li class="menu-wrap--item">
-              <a href="">
+              <a href="{{ url_for('idmatch_landing', lang='ru') }}">
 		<img src="{{ url_for('static', filename='images/rus.png') }}">
 	      </a>
             </li>
