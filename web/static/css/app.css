@@ -1,0 +1,10 @@
+.menu .menu-wrap--item {
+    list-style: none;
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 10px;
+}
+
+.menu .menu-wrap--item img {
+    height: 32px;
+}
