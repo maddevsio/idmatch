@@ -4,15 +4,14 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=0">
     <meta name="format-detection" content="telephone=no">
-
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicons/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}" sizes="32x32">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}" sizes="16x16">
     <link rel="manifest" href="{{ url_for('static', filename='favicons/manifest.json') }}">
     <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
     <meta name="theme-color" content="#ffffff">
     <meta name="description" content="API которое распознает данные на ID-карточках и сравнивает лица">
-
     <title>{{ _('IDMATCH &mdash; Машинное обучение на службе у финансовых организаций/страховых компаний/брокеров/государства') }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='dist/styles.css') }}">
   </head>
@@ -38,9 +37,19 @@
             </svg>
             IDMATCH
           </a>
-          <ul style="padding-right: 100px;">
+          <ul>
             <li class="menu-wrap--item">
               <a href="#contacts">{{ _('Контакты') }}</a>
+            </li>
+            <li class="menu-wrap--item">
+              <a href="">
+		<img src="{{ url_for('static', filename='images/usa.png') }}">
+	      </a>
+            </li>
+            <li class="menu-wrap--item">
+              <a href="">
+		<img src="{{ url_for('static', filename='images/rus.png') }}">
+	      </a>
             </li>
           </ul>
         </div>

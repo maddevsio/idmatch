@@ -3,7 +3,7 @@ import datetime
 import json
 import os
 import sys
-from flask import Flask, Response, render_template, request
+from flask import Flask, Response, render_template, request, session
 from flask_babel import Babel
 from werkzeug.utils import secure_filename
 
@@ -20,20 +20,28 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 babel = Babel(app)
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
+
 
 @babel.localeselector
 def get_locale():
+    return session.get('lang', 'en')
     return request.accept_languages.best_match(['ru', 'en'])
 
 
-
-@app.route('/', methods=['GET'])
-def idmatch_landing():
+@app.route('/', methods=['GET'], defaults={'lang': 'en'})
+@app.route('/<lang>', methods=['GET'])
+def idmatch_landing(lang):
+    session['lang'] = lang or 'en'
+    print(session['lang'])
     return render_template('idmatch_landing.html', **locals())
 
 
-@app.route('/', methods=['POST'])
-def idmatch_landing_demo():
+@app.route('/', methods=['POST'], defaults={'lang': 'en'})
+@app.route('/<lang>', methods=['POST'])
+def idmatch_landing_demo(lang):
+    session['lang'] = lang or 'en'
     result = {}
     if 'faceWebcam' in request.form and not request.form['faceWebcam']:
         face = save_file(request.files['face'])
