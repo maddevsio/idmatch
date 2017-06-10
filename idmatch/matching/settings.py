@@ -14,10 +14,10 @@ UPLOAD_DIR = os.path.join(ROOT_PATH, "temp_data")
 HAARCASCADE_FILE = 'haarcascades/haarcascade_frontalface_default.xml'
 HAARCASCADE = os.path.join(BASE_DIR, HAARCASCADE_FILE)
 
-VGG_PROTO_PATH = 'model/vgg_face_caffe/VGG_FACE_deploy.prototxt'
+VGG_PROTO_PATH = 'model/VGG_FACE_deploy.prototxt'
 PROTO_PATH = os.path.join(BASE_DIR, VGG_PROTO_PATH)
 
-VGG_CAFFE_PATH = 'model/vgg_face_caffe/VGG_FACE.caffemodel'
+VGG_CAFFE_PATH = 'model/VGG_FACE.caffemodel'
 CAFFE_PATH = os.path.join(BASE_DIR, VGG_CAFFE_PATH)
 
 
