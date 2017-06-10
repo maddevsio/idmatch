@@ -35,7 +35,8 @@ idmatch:
     - VIRTUAL_PORT=80
     - LETSENCRYPT_HOST=idmatch.co
     - LETSENCRYPT_EMAIL=rock@idmatch.co
+  links:
+    - idmatch-model
 
 idmatch-model:
   image: maddevsio/idmatch-model
-  autoredeploy: true
