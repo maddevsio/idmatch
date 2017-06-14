@@ -12,3 +12,4 @@ node_modules/
 uploads/*.jpg
 uploads/*.png
 idmatch/matching/model/
+web/uploads/

@@ -3,11 +3,11 @@ import cv2
 import hashlib
 import os
 
-from settings import FACE_CASCADE, BASE_DIR
+from settings import FACE_CASCADE, BASE_DIR, STATIC_DIR
 
 
 def save_image(name, img):
-    location = os.path.join('/home/sobolev/idmatch/web/static', name)
+    location = os.path.join(STATIC_DIR, name)
     cv2.imwrite(location, img)
     return location
 
