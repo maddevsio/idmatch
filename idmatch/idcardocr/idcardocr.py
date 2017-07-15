@@ -61,10 +61,8 @@ def recognize_card(original_image, country='kg', preview=False):
     if scale_down <= 4:
         rows, cols = idcard.shape[:2]
         idcard = cv2.resize(idcard, (scale_down * cols / 8, scale_down * rows / 8))
-        # cv2.imwrite('resized' + original_image)
-        # image = cv2.imread('resized' + original_image)
-    contours, hierarchy = recognize_text(idcard)
 
+    contours, hierarchy = recognize_text(idcard)
     for index, contour in enumerate(contours):
         [x, y, w, h] = cv2.boundingRect(contour)
         gray = cv2.cvtColor(idcard, cv2.COLOR_RGB2GRAY)
