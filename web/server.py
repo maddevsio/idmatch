@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(os.path.dirname(__fil
 sys.path.insert(1, BASE_DIR)
 
 from idmatch.matching import match
-from idmatch.idcardocr import recognize_card
+from idmatch.idcardocr import CardReader
 
 UPLOAD_FOLDER = os.path.join(BASE_DIR, 'web/uploads')
 
@@ -58,11 +58,13 @@ def idmatch_landing_demo(lang):
 
 @app.route('/match-and-ocr', methods=['POST'])
 def idmatch_api():
-    result = {}
     face = save_file(request.files['face'])
     idcard = save_file(request.files['id'])
-    result['Match'] = match(face, idcard)
-    result['OCR'] = recognize_card(idcard)
+    read_card = CardReader(template='kg')
+    result = {
+        'Match': match(face, idcard),
+        'OCR': recognize_card(idcard)
+    }
     return Response(json.dumps(result, indent=4), mimetype='application/json')
 
 

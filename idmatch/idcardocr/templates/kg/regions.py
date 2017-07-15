@@ -93,3 +93,6 @@ class IDcard(IDcardSanitizer, Sanitizer):
             'errors': ", ".join(blocks.errors)
         }
         return {k: value.decode('utf-8') for k, value in data.iteritems()}
+
+
+regions = IDcard(blocks)

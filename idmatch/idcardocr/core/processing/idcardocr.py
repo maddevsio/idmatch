@@ -48,7 +48,7 @@ def detect_dpi(img):
     return w
 
 
-def recognize_card(original_image, country='kg', preview=False):
+def recognize_card(original_image, preview=False):
     from processing.border_removal import resize
     from processing.crop import process_image
     result = []
@@ -81,4 +81,4 @@ def recognize_card(original_image, country='kg', preview=False):
         original_image = original_image.split('/')[-1]
         location = save_image('regions' + original_image, idcard)
         return location, regionskir(result)
-    return regionskir(result)
+    return result

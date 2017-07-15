@@ -3,7 +3,6 @@
 import click
 import json
 from idmatch.matching import match
-from idmatch.idcardocr import cardreader
 
 
 @click.command()
