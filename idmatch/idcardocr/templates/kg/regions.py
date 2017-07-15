@@ -51,19 +51,15 @@ class IDcard(IDcardSanitizer, Blocks):
         if not result:
             self.errors.append("601: Birthday element not found")
             return
-
         parts = []
         for block in self.blocks:
             distance_gender = abs(0.71 - block['x'])
             distance_y = abs(0.65 - block['y'])
-
             if 0.03 > distance_y and 0.1 < distance_gender and block['x'] - result['x'] >= 0.0:
                 parts.append(block)
-
         if not parts:
             self.errors.append("602: Required birthday regions not found")
             return
-        # parts_sorted = sort(parts,  key=lambda b: b['x'],  reverse=True)
         self.birthday = "".join([part['text'] for part in parts])
         self.birthday = self.sanitize_birthday()
         return self.birthday
@@ -81,7 +77,7 @@ class IDcard(IDcardSanitizer, Blocks):
         return self.gender
 
     def data(self):
-        return {
+        data = {
             'surname': self.find_surname(),
             'middlename': self.find_middlename(),
             'firstname': self.find_firstname(),
@@ -92,5 +88,5 @@ class IDcard(IDcardSanitizer, Blocks):
             'nationality': self.find_nationality(),
             'errors': ", ".join(self.errors)
         }
-        # return {k: value. for k, value in data.iteritems()}
+        return {k: v for k, v in data.iteritems()}
 

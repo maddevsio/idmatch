@@ -2,7 +2,7 @@
 # coding: utf-8
 import click
 import json
-from idmatch.idcardocr.routing import CardReader
+from idmatch.idcardocr import CardReader
 
 
 @click.command()

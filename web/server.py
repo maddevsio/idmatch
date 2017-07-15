@@ -60,7 +60,7 @@ def idmatch_landing_demo(lang):
 def idmatch_api():
     face = save_file(request.files['face'])
     idcard = save_file(request.files['id'])
-    read_card = CardReader(template='kg')
+    card = CardReader(template='kg')
     result = {
         'Match': match(face, idcard),
         'OCR': recognize_card(idcard)
