@@ -1,6 +1,6 @@
 # coding: utf-8
 from .blocks import Blocks
-from .rules import LETTER_RULES
+from .rules import NUMBERS_RULES
 from .rules import LATIN_RULES
 from .rules import KYRILLIC_RULES
 from .rules import WHITESPACE_RULES

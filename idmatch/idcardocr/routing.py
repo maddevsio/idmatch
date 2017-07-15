@@ -1,5 +1,5 @@
 # coding: utf-8
-from template.kg import CardKG
+from .templates.kg import CardKG
 
 
 class CardReader:
@@ -7,13 +7,13 @@ class CardReader:
         self.template = template
         self.image = image
 
-    def router(self):
+    def route(self):
         method = 'template_{0}'.format(self.template)
         if not hasattr(self, method):
             return 'Unknown idcard template'
-        return getattr(self, method)
+        return getattr(self, method)()
 
     def template_kg(self):
-        card = CardKG(image)
+        card = CardKG(self.image)
         return card.processing()
         

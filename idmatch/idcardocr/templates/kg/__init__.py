@@ -1,13 +1,16 @@
 # coding: utf-8
 from .preprocessing import preprocessing
 from .processing import processing
-from .regions import regions
+from .regions import IDcard
 
 
 class CardKG:
-    def processing(self, image):
-        preprocessed_image = preprocessing(image)
+    def __init__(self, image):
+        self.image = image
+
+    def processing(self):
+        preprocessed_image = preprocessing(self.image)
         block_text = processing(preprocessed_image)
-        regions = regions(block_text)
+        regions = IDcard(block_text)
         return regions.data()
 

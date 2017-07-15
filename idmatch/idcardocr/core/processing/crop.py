@@ -259,16 +259,6 @@ def process_image(path, out_path):
     crop = pad_crop(crop, contours, edges, border_contour)
 
     crop = [int(x / scale) for x in crop]  # upscale to the original image size.
-    #draw = ImageDraw.Draw(im)
-    #c_info = props_for_contours(contours, edges)
-    #for c in c_info:
-    #    this_crop = c['x1'], c['y1'], c['x2'], c['y2']
-    #    draw.rectangle(this_crop, outline='blue')
-    #draw.rectangle(crop, outline='red')
-    #im.save(out_path)
-    #draw.text((50, 50), path, fill='red')
-    #orig_im.save(out_path)
-    #im.show()
     text_im = orig_im.crop(crop)
     text_im.save(out_path)
-    print '%s -> %s' % (path, out_path)
+    return out_path

@@ -1,5 +1,5 @@
 # coding: utf-8
-from idcardocr.core.processing.idcardocr import recognize_card
+from idmatch.idcardocr.core.processing.idcardocr import recognize_card
 
 
 def processing(image):

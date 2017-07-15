@@ -1,9 +1,9 @@
 # coding: utf-8
-from idcardocr.core.regions.mapping import IDcardSanitizer
-from idcardocr.core.regions.sanitizer import Sanitizer
+from idmatch.idcardocr.core.regions.mapping import IDcardSanitizer
+from idmatch.idcardocr.core.regions.blocks import Blocks
 
 
-class IDcard(IDcardSanitizer, Sanitizer):
+class IDcard(IDcardSanitizer, Blocks):
     serial = ""
     firstname = ""
     surname = ""
@@ -65,7 +65,7 @@ class IDcard(IDcardSanitizer, Sanitizer):
             return
         # parts_sorted = sort(parts,  key=lambda b: b['x'],  reverse=True)
         self.birthday = "".join([part['text'] for part in parts])
-        self.birthday = self.sanitizer_remove_whitespaces(self.birthday)
+        self.birthday = self.sanitize_birthday()
         return self.birthday
 
     def find_nationality(self):
@@ -81,18 +81,16 @@ class IDcard(IDcardSanitizer, Sanitizer):
         return self.gender
 
     def data(self):
-        data = {
-            'surname': blocks.find_surname(),
-            'middlename': blocks.find_middlename(),
-            'firstname': blocks.find_firstname(),
-            'birthday': blocks.find_birthday(),
-            'serial': blocks.find_serial(),
-            'gender': blocks.find_gender(),
-            'inn': blocks.find_inn(),
-            'nationality': blocks.find_nationality(),
-            'errors': ", ".join(blocks.errors)
+        return {
+            'surname': self.find_surname(),
+            'middlename': self.find_middlename(),
+            'firstname': self.find_firstname(),
+            'birthday': self.find_birthday(),
+            'serial': self.find_serial(),
+            'gender': self.find_gender(),
+            'inn': self.find_inn(),
+            'nationality': self.find_nationality(),
+            'errors': ", ".join(self.errors)
         }
-        return {k: value.decode('utf-8') for k, value in data.iteritems()}
+        # return {k: value. for k, value in data.iteritems()}
 
-
-regions = IDcard(blocks)
