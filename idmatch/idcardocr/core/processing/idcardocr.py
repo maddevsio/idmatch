@@ -6,14 +6,11 @@ import cv2
 import pytesseract
 from PIL import Image
 
-from processing.border_removal import remove_borders
-from regions import regionskir
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(1, os.path.join(BASE_DIR, '../idmatch'))
 
-from matching.utils import detect_face
-from matching.utils import save_image
+from idmatch.matching.utils import detect_face
+from idmatch.matching.utils import save_image
 
 MAX_HEIGHT = 40
 MIN_HEIGHT = 16
@@ -48,14 +45,15 @@ def detect_dpi(img):
     return w
 
 
-def recognize_card(original_image, country='kg', preview=False):
-    from processing.border_removal import resize
-    from processing.crop import process_image
+def recognize_card(original_image, preview=False):
+    from idmatch.idcardocr.core.preprocessing.image import resize
+    from idmatch.idcardocr.core.processing.crop import process_image
     result = []
     cropped_image = "croped-image.jpg"
-    process_image(original_image, cropped_image)
-    idcard = cv2.imread(cropped_image, cv2.COLOR_BGR2GRAY)
-    idcard = resize(idcard, width=720)
+    # TODO: 
+    # process_image(original_image, cropped_image)
+    # idcard = cv2.imread(cropped_, cv2.COLOR_BGR2GRAY)
+    idcard = resize(original_image, width=720)
 
     scale_down = (8 * 170 / detect_dpi(idcard))
     if scale_down <= 4:
@@ -63,6 +61,7 @@ def recognize_card(original_image, country='kg', preview=False):
         idcard = cv2.resize(idcard, (scale_down * cols / 8, scale_down * rows / 8))
 
     contours, hierarchy = recognize_text(idcard)
+    
     for index, contour in enumerate(contours):
         [x, y, w, h] = cv2.boundingRect(contour)
         gray = cv2.cvtColor(idcard, cv2.COLOR_RGB2GRAY)
@@ -81,4 +80,4 @@ def recognize_card(original_image, country='kg', preview=False):
         original_image = original_image.split('/')[-1]
         location = save_image('regions' + original_image, idcard)
         return location, regionskir(result)
-    return regionskir(result)
+    return result

@@ -1,2 +1,2 @@
 # coding: utf-8
-from core import match
+from .core import match

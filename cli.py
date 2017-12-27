@@ -2,22 +2,15 @@
 # coding: utf-8
 import click
 import json
-from idmatch.matching import match
-from idmatch.idcardocr import cardreader
+from idmatch.idcardocr import CardReader
 
 
 @click.command()
-@click.option('--img', help='Webcam image path.')
-@click.option('--idcard', help='ID card image path.')
-def matching(img, idcard):
-    result = match(img, idcard)
-    click.echo(json.dumps(result, indent=4))
-
-
-@click.command()
-@click.option('--idcard', help='ID card image path.')
-def cardocr(idcard):
-    return cardreader(idcard)
+@click.option('--image', help='ID card image path.')
+@click.option('--template', help='ID card image path.')
+def cardocr(image, template='kg'):
+    reader = CardReader('kg', 'demo.jpg')
+    print(reader.route())
 
 
 if __name__ == '__main__':
