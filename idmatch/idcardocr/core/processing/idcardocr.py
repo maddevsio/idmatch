@@ -1,6 +1,7 @@
 # coding: utf-8
 import os
 import sys
+import time
 
 import cv2
 import pytesseract
@@ -9,14 +10,12 @@ from PIL import Image
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(1, os.path.join(BASE_DIR, '../idmatch'))
 
-from idmatch.matching.utils import detect_face
-from idmatch.matching.utils import save_image
+from idmatch.idcardocr.core.processing.utils import save_image
 
 MAX_HEIGHT = 40
 MIN_HEIGHT = 16
 MAX_WIDTH = 330
 MIN_WIDTH = 16
-
 
 def recognize_text(original):
     idcard = original
@@ -39,29 +38,26 @@ def recognize_text(original):
     )
     return contours, hierarchy
 
-
-def detect_dpi(img):
-    x, y, w, h = detect_face(img)
-    return w
-
-
 def recognize_card(original_image, preview=False):
     from idmatch.idcardocr.core.preprocessing.image import resize
     from idmatch.idcardocr.core.processing.crop import process_image
     result = []
     cropped_image = "croped-image.jpg"
+    workdir = str(int(time.time()))
     # TODO: 
     # process_image(original_image, cropped_image)
     # idcard = cv2.imread(cropped_, cv2.COLOR_BGR2GRAY)
     idcard = resize(original_image, width=720)
 
-    scale_down = (8 * 170 / detect_dpi(idcard))
-    if scale_down <= 4:
-        rows, cols = idcard.shape[:2]
-        idcard = cv2.resize(idcard, (scale_down * cols / 8, scale_down * rows / 8))
+    #scale_down = (8 * 170 / detect_dpi(idcard))
+    #if scale_down <= 4:
+        #rows, cols = idcard.shape[:2]
+        #idcard = cv2.resize(idcard, (scale_down * cols / 8, scale_down * rows / 8))
 
     contours, hierarchy = recognize_text(idcard)
-    
+    if not os.path.exists(workdir):
+        os.makedirs(workdir)
+
     for index, contour in enumerate(contours):
         [x, y, w, h] = cv2.boundingRect(contour)
         gray = cv2.cvtColor(idcard, cv2.COLOR_RGB2GRAY)
@@ -69,15 +65,20 @@ def recognize_card(original_image, preview=False):
         if cv2.countNonZero(roi) / h * w > 0.55:
             if h > 16 and w > 16:
                 filename = '%s.jpg' % index
-                cv2.imwrite(filename, roi)
+                cv2.imwrite(workdir+'/'+filename, roi)
                 text = pytesseract.image_to_string(
-                    Image.open(filename), lang="kir+eng", config="-psm 7"
+                    Image.open(workdir+'/'+filename), lang="kir+eng", config="-psm 7"
                 )                
                 item = {'x': x, 'y': y, 'w': w, 'h': h, 'text': text}
+                print(text)
                 result.append(item)
                 cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
     if preview:
         original_image = original_image.split('/')[-1]
         location = save_image('regions' + original_image, idcard)
         return location, regionskir(result)
+    
+    #im = Image.fromarray(idcard)
+    #im.save("regions.jpeg")
+
     return result

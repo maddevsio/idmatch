@@ -15,18 +15,21 @@ def remove_borders(image):
     image = resize(image, height=500)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (5, 5), 0)
-    edged = cv2.Canny(gray, 75, 200)
+    edged = cv2.Canny(gray, 30, 200)
     _, cnts, _ = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
-    screenCnt = None
+    largest_area = 0
     for c in cnts:
-        peri = cv2.arcLength(c, True)
-        approx = cv2.approxPolyDP(c, 0.02 * peri, True)
-        print(len(approx) == 4)
-        if len(approx) == 4:
-            screenCnt = approx
-            break
-    cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
+        r = cv2.minAreaRect(c)
+        area = r[1][0]*r[1][1]
+        if area > largest_area:
+            largest_area = area
+            rect = r
+
+    screenCnt = np.int0(cv2.boxPoints(rect))
+        
+    #cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
+  
     if screenCnt is not None and len(screenCnt) > 0:
         return four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
     cv2.imwrite('original.jpg', orig)

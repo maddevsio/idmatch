@@ -6,10 +6,10 @@ from idmatch.idcardocr import CardReader
 
 
 @click.command()
-@click.option('--image', help='ID card image path.')
-@click.option('--template', help='ID card image path.')
-def cardocr(image, template='kg'):
-    reader = CardReader('kg', 'demo.jpg')
+@click.option('--image', default='demo.jpg', help='ID card image path')
+@click.option('--template', default='kg', help='ID card template (kg only is available)')
+def cardocr(image, template):
+    reader = CardReader(template, image)
     print(reader.route())
 
 

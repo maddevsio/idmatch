@@ -2,6 +2,7 @@
 import hashlib
 import numpy as np
 import cv2
+import os
 
 
 def four_point_transform(image, pts):
@@ -40,3 +41,8 @@ def save_contours(ratio, orig, contours):
     image = four_point_transform(orig, contours.reshape(4, 2) * ratio)
     cv2.imwrite(filename, image)
     return filename
+
+def save_image(name, img):
+    location = os.path.join(STATIC_DIR, name)
+    cv2.imwrite(location, img)
+    return location
