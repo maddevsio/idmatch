@@ -58,6 +58,7 @@ def recognize_card(original_image, preview=False):
     if not os.path.exists(workdir):
         os.makedirs(workdir)
 
+# todo fix encoding in result + sharp filter
     for index, contour in enumerate(contours):
         [x, y, w, h] = cv2.boundingRect(contour)
         gray = cv2.cvtColor(idcard, cv2.COLOR_RGB2GRAY)
