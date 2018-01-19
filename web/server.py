@@ -11,9 +11,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(os.path.dirname(__fil
 
 sys.path.insert(1, BASE_DIR)
 
-from idmatch.matching import match
-from idmatch.idcardocr import CardReader
-
 UPLOAD_FOLDER = os.path.join(BASE_DIR, 'web/uploads')
 
 app = Flask(__name__)

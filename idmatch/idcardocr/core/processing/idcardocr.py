@@ -38,7 +38,7 @@ def recognize_text(original):
     )
     return contours, hierarchy
 
-def recognize_card(original_image, preview=False):
+def recognize_card(idcard):
     from idmatch.idcardocr.core.preprocessing.image import resize
     from idmatch.idcardocr.core.processing.crop import process_image
     result = []
@@ -47,13 +47,10 @@ def recognize_card(original_image, preview=False):
     # TODO: 
     # process_image(original_image, cropped_image)
     # idcard = cv2.imread(cropped_, cv2.COLOR_BGR2GRAY)
-    idcard = resize(original_image, width=720)
 
-    #scale_down = (8 * 170 / detect_dpi(idcard))
-    #if scale_down <= 4:
-        #rows, cols = idcard.shape[:2]
-        #idcard = cv2.resize(idcard, (scale_down * cols / 8, scale_down * rows / 8))
-
+    # In some cases resized image gives worse results
+    # idcard = resize(idcard, width=720)    
+    
     contours, hierarchy = recognize_text(idcard)
     if not os.path.exists(workdir):
         os.makedirs(workdir)
@@ -74,12 +71,8 @@ def recognize_card(original_image, preview=False):
                 print(text)
                 result.append(item)
                 cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
-    if preview:
-        original_image = original_image.split('/')[-1]
-        location = save_image('regions' + original_image, idcard)
-        return location, regionskir(result)
     
-    #im = Image.fromarray(idcard)
-    #im.save("regions.jpeg")
+    im = Image.fromarray(idcard)
+    im.save(workdir+"/regions.jpeg")
 
     return result
