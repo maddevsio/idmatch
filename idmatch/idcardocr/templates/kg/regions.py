@@ -88,5 +88,8 @@ class IDcard(IDcardSanitizer, Blocks):
             'nationality': self.find_nationality(),
             'errors': ", ".join(self.errors)
         }
+        for k, v in data.iteritems():
+            print(k)
+            print(v)
         return {k: v for k, v in data.iteritems()}
 
