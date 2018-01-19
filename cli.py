@@ -10,7 +10,7 @@ from idmatch.idcardocr import CardReader
 @click.option('--template', default='kg', help='ID card template (kg only is available)')
 def cardocr(image, template):
     reader = CardReader(template, image)
-    print(reader.route())
+    print(json.dumps(reader.route(), sort_keys=False, ensure_ascii=False, indent=3))
 
 
 if __name__ == '__main__':
