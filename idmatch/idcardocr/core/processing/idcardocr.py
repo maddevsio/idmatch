@@ -12,11 +12,6 @@ sys.path.insert(1, os.path.join(BASE_DIR, '../idmatch'))
 
 from idmatch.idcardocr.core.processing.utils import save_image
 
-MAX_HEIGHT = 40
-MIN_HEIGHT = 16
-MAX_WIDTH = 330
-MIN_WIDTH = 16
-
 def recognize_text(original):
     idcard = original
     gray = cv2.cvtColor(idcard, cv2.COLOR_BGR2GRAY)
@@ -49,8 +44,8 @@ def recognize_card(idcard):
     # idcard = cv2.imread(cropped_, cv2.COLOR_BGR2GRAY)
 
     # In some cases resized image gives worse results
-    # idcard = resize(idcard, width=720)    
-    
+    # idcard = resize(idcard, width=720)
+
     contours, hierarchy = recognize_text(idcard)
     if not os.path.exists(workdir):
         os.makedirs(workdir)
@@ -66,11 +61,12 @@ def recognize_card(idcard):
                 cv2.imwrite(workdir+'/'+filename, roi)
                 text = pytesseract.image_to_string(
                     Image.open(workdir+'/'+filename), lang="kir+eng", config="-psm 7"
-                )                
-                item = {'x': x, 'y': y, 'w': w, 'h': h, 'text': text}
-                print(text)
-                result.append(item)
-                cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
+                )
+                if len(text) > 0:                
+                    item = {'x': x, 'y': y, 'w': w, 'h': h, 'text': text}
+                    # print(text)
+                    result.append(item)
+                    cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
     
     im = Image.fromarray(idcard)
     im.save(workdir+"/regions.jpeg")
