@@ -32,18 +32,18 @@ class IDcardSanitizer(Sanitizer):
         self.middlename = self.kyrillic(self.middlename)
     
     def sanitize_gender(self):
-        if "З" in self.gender:
+        if "З" or "3" in self.gender:
             self.gender = "Э"
 
     def sanitize_nationality(self):
         pass
 
-    def sanitize_birthday(self):
-        if len(self.birthday) == 8:
-            self.birthday = self.birthday[:2]+"."+self.birthday[2:4]+"."+self.birthday[4:]
-        else:
-            self.birthday = None
-            self.errors.append("601: Birthday element not found")
-
     def sanitize_inn(self):
         self.inn = self.numbers(self.inn)
+
+    def sanitize_birthday(self):
+        if len(self.inn) < 10:
+            self.birthday = None
+            self.errors.append("601: Birthday element not found")
+        else:
+            self.birthday = self.inn[1:3]+"."+self.inn[3:5]+"."+self.inn[5:9]
