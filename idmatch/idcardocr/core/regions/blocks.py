@@ -8,8 +8,8 @@ class Blocks:
             block['y'] = float(block['y']) / float(self.size[1])
             block['w'] = float(block['w']) / float(self.size[0])
             block['h'] = float(block['h']) / float(self.size[1])
-            print(block['x'], block['y'])
-            print(block['text'])
+            # print(block['x'], block['y'])
+            # print(block['text'])
         return blocks
 
     def find_common(self, x, y):
