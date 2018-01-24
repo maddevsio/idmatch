@@ -14,11 +14,11 @@ from idmatch.idcardocr.core.processing.utils import save_image
 
 def recognize_text(original):
     idcard = original
-    gray = cv2.cvtColor(idcard, cv2.COLOR_BGR2GRAY)
+    # gray = cv2.cvtColor(idcard, cv2.COLOR_BGR2GRAY)
 
     # Morphological gradient:
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-    opening = cv2.morphologyEx(gray, cv2.MORPH_GRADIENT, kernel)
+    opening = cv2.morphologyEx(idcard, cv2.MORPH_GRADIENT, kernel)
 
     # Binarization
     ret, binarization = cv2.threshold(opening, 0.0, 255.0, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
@@ -46,14 +46,15 @@ def recognize_card(idcard):
     # In some cases resized image gives worse results
     # idcard = resize(idcard, width=720)
 
-    contours, hierarchy = recognize_text(idcard)
+    gray = cv2.cvtColor(idcard, cv2.COLOR_BGR2GRAY)
+
+    contours, hierarchy = recognize_text(gray)
     if not os.path.exists(workdir):
         os.makedirs(workdir)
 
 # todo fix encoding in result + sharp filter
     for index, contour in enumerate(contours):
         [x, y, w, h] = cv2.boundingRect(contour)
-        gray = cv2.cvtColor(idcard, cv2.COLOR_RGB2GRAY)
         roi = gray[y:y + h, x:x + w]
         if cv2.countNonZero(roi) / h * w > 0.55:
             if h > 16 and w > 16:
