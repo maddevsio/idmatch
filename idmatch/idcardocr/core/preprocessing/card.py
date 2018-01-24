@@ -20,7 +20,7 @@ def remove_borders(image):
     contrasted = clahe.apply(blur)
     im = Image.fromarray(contrasted)
     im.save("c1.jpeg")
-    edged = cv2.Canny(blur, 20, 200)
+    edged = cv2.Canny(blur, 20, 170)
     _, cnts, _ = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
     largest_area = 0
