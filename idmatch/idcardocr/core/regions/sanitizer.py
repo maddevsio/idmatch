@@ -26,6 +26,3 @@ class Sanitizer:
 
     def kyrillic(self, text):
         return self.__replace_letters(text, KYRILLIC_RULES)
-
-    def gender(self, text):
-        pass

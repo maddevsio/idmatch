@@ -13,3 +13,7 @@ uploads/*.jpg
 uploads/*.png
 idmatch/matching/model/
 web/uploads/
+[0-9]*/
+*.jpeg
+*.jpg
+*.png
