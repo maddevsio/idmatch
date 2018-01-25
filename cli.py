@@ -5,9 +5,10 @@ import click
 import json
 import os
 import sys
-import traceback  
+import traceback
 
 from idmatch.idcardocr import CardReader
+from scipy.optimize import minimize
 
 @click.command()
 @click.option('--image', default='demo.jpg', help='ID card image path')
@@ -20,7 +21,7 @@ def cardocr(image, template, check_solution):
     try:
         reader = CardReader(template, image)
         print(json.dumps(reader.route(), sort_keys=False, ensure_ascii=False, indent=3))
-    except Exception as ex:
+    except:
         print("Unhandled exception : ")
         traceback.print_exc()
 
@@ -35,9 +36,10 @@ def checkSolution(path, template):
             if not os.path.exists(imgJson):
                 continue
             try:
-                printMatchPercent(rootName+file, imgJson, template)
+                print("match error percent : %f" % matchErrorPercent(rootName+file, imgJson, template))
             except:
                 print("Process file %s failed with exception" % file)
+                traceback.print_exc()
 
 SURNAME='surname'
 FIRSTNAME='firstname'
@@ -52,29 +54,38 @@ ALL_FIELDS = [SURNAME, FIRSTNAME,
                 INN, BIRTHDAY,
                 NATIONALITY, SERIAL]
 
-def printMatchPercent(imgPath, jsonPath, template):
-    reader = CardReader(template, imgPath)
-    json1 = reader.route()
-    with open(jsonPath) as jpf:
-        json2 = json.load(jpf)
-    jpf.close()
+def matchErrorPercent(imgPath, jsonPath, template):
+    try:
+        reader = CardReader(template, imgPath)
+        json1 = reader.route()
+        with open(jsonPath) as jpf:
+            json2 = json.load(jpf)
+        jpf.close()
 
-    levenstein_sum = 0
-    all_symbols_sum = 0
-    print("*****************************")
-    for key in ALL_FIELDS:
-        s2 = json2[key].upper().encode('utf-8')
-        s1 = json1[key]
-        all_symbols_sum += len(s2)
-        ds = levenshteinDistance(s1, s2)
-        levenstein_sum += ds
-        print(s1 + ' == ' + s2 + ' lev : %d' % 
-             ds + ' tanimoto : %f' % tanimoto(s1, s2))
-    print("File %s process finished" % imgPath)
-    print("Total SUM : %d" % levenstein_sum + " symbols : %d" % all_symbols_sum)
-    print("Error : %f%%" % (levenstein_sum / (float)(all_symbols_sum) * 100.0))
+        levenstein_sum = 0
+        all_symbols_sum = 0
+        print("*****************************")
+        for key in ALL_FIELDS:
+            s2 = json2[key].upper().encode('utf-8')
+            s1 = json1[key]
+            s1 = s1 or ""
+            s2 = s2 or ""
+            all_symbols_sum += len(s2)
+            ds = levenshteinDistance(s1, s2)
+            levenstein_sum += ds
+            print(s1 + ' == ' + s2 + ' lev : %d' % 
+                ds + ' tanimoto : %f' % tanimoto(s1, s2))
+        return levenstein_sum / (float)(all_symbols_sum) * 100.0
+    except:
+        return 100.0
 
 def levenshteinDistance(s1, s2):
+    if s1 is None and s2 is None:
+        return 0
+    if s1 is None:
+        return len(s2)
+    if s2 is None:
+        return len(s1)
     # "Calculates the Levenshtein distance between a and b."
     n, m = len(s1), len(s2)
     if n > m:

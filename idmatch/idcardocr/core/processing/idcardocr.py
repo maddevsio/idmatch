@@ -58,14 +58,14 @@ def recognize_card(idcard):
         roi = gray[y:y + h, x:x + w]
         if cv2.countNonZero(roi) / h * w > 0.55:
             if h > 16 and w > 16:
-                filename = '%s.jpg' % index
-                cv2.imwrite(workdir+'/'+filename, roi)
-                text = pytesseract.image_to_string(
-                    Image.open(workdir+'/'+filename), lang="kir+eng", config="-psm 7"
-                )
+                # filename = '%s.jpg' % index
+                # cv2.imwrite(workdir+'/'+filename, roi)
+                # text = pytesseract.image_to_string(
+                #     Image.open(workdir+'/'+filename), lang="kir+eng", config="-psm 7"
+                # )
+                text = pytesseract.image_to_string(Image.fromarray(roi), lang="kir+eng", config="-psm 7")
                 if len(text) > 0:                
                     item = {'x': x, 'y': y, 'w': w, 'h': h, 'text': text}
-                    # print(text)
                     result.append(item)
                     cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
     
