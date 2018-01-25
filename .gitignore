@@ -17,3 +17,4 @@ web/uploads/
 *.jpeg
 *.jpg
 *.png
+.vscode/*
