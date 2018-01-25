@@ -19,7 +19,7 @@ def remove_borders(image):
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
     contrasted = clahe.apply(blur)
     im = Image.fromarray(contrasted)
-    im.save("c1.jpeg")
+    
     edged = cv2.Canny(blur, 20, 170)
     _, cnts, _ = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
@@ -34,11 +34,9 @@ def remove_borders(image):
     screenCnt = np.int0(cv2.boxPoints(rect))
         
     im = Image.fromarray(edged)
-    im.save("c2.jpeg")
 
     cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
     im = Image.fromarray(image)
-    im.save("c3.jpeg")
   
     if screenCnt is not None and len(screenCnt) > 0:
         return four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
