@@ -58,8 +58,8 @@ class IDcard(IDcardSanitizer, Blocks):
     def data(self):
         data = {
             'surname': self.find_surname(),
-            'middlename': self.find_middlename(),
             'firstname': self.find_firstname(),
+            'middlename': self.find_middlename(),
             'inn': self.find_inn(),
             'birthday': self.find_birthday(),
             'serial': self.find_serial(),
@@ -67,5 +67,5 @@ class IDcard(IDcardSanitizer, Blocks):
             'nationality': self.find_nationality(),
             'errors': ", ".join(self.errors)
         }       
-        return {k: v for k, v in data.iteritems()}
+        return {k: v.decode('utf-8') for k, v in data.iteritems()}
 
