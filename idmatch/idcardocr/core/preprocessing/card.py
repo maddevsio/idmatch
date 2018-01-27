@@ -37,7 +37,7 @@ def remove_borders(image):
 
     cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
     im = Image.fromarray(image)
-  
+
     if screenCnt is not None and len(screenCnt) > 0:
         return four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
     cv2.imwrite('original.jpg', orig)

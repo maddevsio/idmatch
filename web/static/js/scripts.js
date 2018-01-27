@@ -63,29 +63,12 @@ $(function () {
         var photo_val = $('#face').val();
         fileName = fileName.replace('C:\\fakepath\\','');
         if(!fileName && photo_val){
-            console.log('043434343434343-');
             dock_label.removeClass('add_item');
             fileName = dock_label.data('message');
             $('#arrows_dock').removeClass('animate');
             $('.submit').addClass('disabled');
             $('#submit_btn').attr('disabled', true);
-        }
-        else if (!fileName && webcam){
-            console.log('0-0-0-0-0-0-0-0-0-0-');
-            fileName = dock_label.data('message');
-            $('.submit').addClass('disabled');
-            $('#submit_btn').attr('disabled', true);
-            $('#arrows_dock').removeClass('animate');
-        }
-        else if(webcam && fileName){
-            console.log('-=--=-=-==-=-=-=-=-=-=');
-            dock_label.addClass('add_item');
-            $('.submit').removeClass('disabled');
-            $('#submit_btn').removeAttr('disabled');
-            $('#arrows_dock').addClass('animate');
-        }
-        else if(photo_val){
-            console.log('1232321312321321');
+        } else {
             dock_label.addClass('add_item');
             $('#arrows_dock').addClass('animate');
             $('.submit').removeClass('disabled');
