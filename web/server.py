@@ -43,12 +43,13 @@ def idmatch_landing(lang):
 def idmatch_landing_demo(lang):
     session['lang'] = lang or 'en'
     result = {}
+    face = ''
     idcard = save_file(request.files['id'])
-    if len(request.form['faceWebcam']) > 0:
-        if 'faceWebcam' in request.form and not request.form['faceWebcam']:
-            face = save_file(request.files['face'])
-        else:
-            face = save_webcam(request.form['faceWebcam'])
+    if len(request.form['faceWebcam']) != 0:
+        face = save_webcam(request.form['faceWebcam'])
+    elif len(request.files['face'].filename) != 0:
+        face = save_file(request.files['face'])
+    if face != '':
         result['Match'] = match(face, idcard, preview=True)
         result['Match']['percentage'] = int(result['Match']['percentage'])
         result['Match']['face'] = "/".join(result['Match']['face'].split("/")[-2:])
