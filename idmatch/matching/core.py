@@ -5,8 +5,10 @@ import numpy as np
 import utils
 import settings
 
-
-net = caffe.Net(settings.PROTO_PATH, settings.CAFFE_PATH, caffe.TEST)
+try:
+    net = caffe.Net(settings.PROTO_PATH, settings.CAFFE_PATH, caffe.TEST)
+except:
+    net = None
 
 
 def compile_image(img):
