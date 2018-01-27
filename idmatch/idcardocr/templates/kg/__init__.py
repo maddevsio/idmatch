@@ -10,7 +10,7 @@ class CardKG:
 
     def processing(self):
             preprocessed_image = preprocessing(self.image)
-            block_text = processing(preprocessed_image)
+            img, block_text = processing(preprocessed_image)
             im = Image.fromarray(preprocessed_image)
             regions = IDcard(block_text, im.size)
-            return regions.data()
+            return img, regions.data()

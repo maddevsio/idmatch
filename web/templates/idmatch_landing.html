@@ -139,12 +139,12 @@
             <path class="arrow_3" d="M752.3,229.08,527.2,4a13.51,13.51,0,1,0-19.1,19.1l215.5,215.5L508.1,454.08a13.55,13.55,0,0,0,9.5,23.1,13.17,13.17,0,0,0,9.5-4l225.1-225.1A13.43,13.43,0,0,0,752.3,229.08Z"/>
           </g>
         </svg>
-        <div id="document" class="input-wrap my_scan disabled">
+        <div id="document" class="input-wrap my_scan">
           <label for="id">
             <img width="40px" src="{{ url_for('static', filename='icons/id-card.svg') }}" alt="">
             <i data-message="{{ _('Загрузите изображение вашего документа') }}" class="filename">{{ _('Загрузите изображение вашего документа') }}</i>
           </label>
-          <input disabled="disabled" class="inputfile" type="file" id="id" name="id">
+          <input class="inputfile" type="file" id="id" name="id">
           <div class="info-wrap">
             <i>*</i>{{ _('Распознаем ID-карты Кыргызской Республики') }}
           </div>
@@ -169,19 +169,19 @@
       {% if result %}
       <div class="results">
         <div class="results-images">
+          {% if 'Match' in result %}
           <div class="results-images--item-wrap">
             <img src="/{{ result['Match']['face'] }}">
           </div>
 
-
           <div class="results-info">
             {{ _('Совпадение') }} <span><i class="match-percent">{{ result['Match']['percentage'] }}</i><i>%</i></span>
           </div>
-
+          {% endif %}
+          
           <div class="results-images--item-wrap">
-            <img src="/{{ result['Match']['idcard'] }}">
+            <img src="/{{ result['OCR']['idcard'] }}">
           </div>
-
         </div>
         <div class="results-code">
           <div class="title">{{ _('Распознанные данные:') }}</div>

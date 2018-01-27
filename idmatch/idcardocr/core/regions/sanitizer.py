@@ -9,7 +9,6 @@ from .rules import WHITESPACE_RULES
 class Sanitizer:
     def __replace_letters(self, text, rules):
         if text is not None:
-            text = text.upper()
             for key in rules.iterkeys():
                 text = text.replace(key, rules[key])
         else:

@@ -13,14 +13,18 @@ from scipy.optimize import minimize
 @click.command()
 @click.option('--image', default='demo.jpg', help='ID card image path')
 @click.option('--template', default='kg', help='ID card template (kg only is available)')
+@click.option('--preview', default=False, help='View result for web form')
 @click.option('--check_solution', default='', help='Run tool for getting match percent')
-def cardocr(image, template, check_solution):
+def cardocr(image, template, preview, check_solution):
     if check_solution:
         checkSolution(check_solution, template)
         return    
     try:
-        reader = CardReader(template, image)
-        print(json.dumps(reader.route(), sort_keys=False, ensure_ascii=False, indent=3))
+        result = CardReader(template, image, preview).route()
+        if preview:
+            print result
+        else:
+            print result.encode('utf-8')
     except:
         print("Unhandled exception : ")
         traceback.print_exc()

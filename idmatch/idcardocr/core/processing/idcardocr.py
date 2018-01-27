@@ -2,15 +2,9 @@
 import os
 import sys
 import time
-
 import cv2
 import pytesseract
 from PIL import Image
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(1, os.path.join(BASE_DIR, '../idmatch'))
-
-from idmatch.idcardocr.core.processing.utils import save_image
 
 def recognize_text(original):
     idcard = original
@@ -34,11 +28,7 @@ def recognize_text(original):
     return contours, hierarchy
 
 def recognize_card(idcard):
-    from idmatch.idcardocr.core.preprocessing.image import resize
-    from idmatch.idcardocr.core.processing.crop import process_image
     result = []
-    cropped_image = "croped-image.jpg"
-    workdir = str(int(time.time()))
     # TODO: 
     # process_image(original_image, cropped_image)
     # idcard = cv2.imread(cropped_, cv2.COLOR_BGR2GRAY)
@@ -47,12 +37,8 @@ def recognize_card(idcard):
     # idcard = resize(idcard, width=720)
 
     gray = cv2.cvtColor(idcard, cv2.COLOR_BGR2GRAY)
-
     contours, hierarchy = recognize_text(gray)
-    if not os.path.exists(workdir):
-        os.makedirs(workdir)
 
-# todo fix encoding in result + sharp filter
     for index, contour in enumerate(contours):
         [x, y, w, h] = cv2.boundingRect(contour)
         roi = gray[y:y + h, x:x + w]
@@ -69,7 +55,7 @@ def recognize_card(idcard):
                     result.append(item)
                     cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
     
-    im = Image.fromarray(idcard)
-    im.save(workdir+"/regions.jpeg")
+    # need to restore settings
+    cv2.imwrite("/webapp/web/static/regions.jpeg", idcard)
 
-    return result
+    return "static/regions.jpeg", result
