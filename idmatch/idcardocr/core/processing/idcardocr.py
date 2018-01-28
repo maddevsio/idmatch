@@ -1,7 +1,5 @@
 # coding: utf-8
-import os
-import sys
-import time
+import hashlib
 import cv2
 import pytesseract
 from PIL import Image
@@ -56,6 +54,8 @@ def recognize_card(idcard):
                     cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
     
     # need to restore settings
-    cv2.imwrite("/webapp/web/static/regions.jpeg", idcard)
+    hash_object = hashlib.sha256(idcard)
+    hex_dig = hash_object.hexdigest()
+    cv2.imwrite("/webapp/web/static/"+hex_dig+".jpeg", idcard)
 
-    return "static/regions.jpeg", result
+    return "static/"+hex_dig+".jpeg", result
