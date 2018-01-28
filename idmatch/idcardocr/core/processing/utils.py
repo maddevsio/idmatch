@@ -2,6 +2,7 @@
 import hashlib
 import numpy as np
 import cv2
+import os
 
 
 def four_point_transform(image, pts):
@@ -33,10 +34,3 @@ def extract_file_hashsum(image):
     img.close()
     hash_sum = hashlib.sha256(content)
     return hash_sum.hexdigest()
-
-
-def save_contours(ratio, orig, contours):
-    filename = extract_file_hashsum(orig)
-    image = four_point_transform(orig, contours.reshape(4, 2) * ratio)
-    cv2.imwrite(filename, image)
-    return filename

@@ -43,16 +43,18 @@ def idmatch_landing(lang):
 def idmatch_landing_demo(lang):
     session['lang'] = lang or 'en'
     result = {}
-    if 'faceWebcam' in request.form and not request.form['faceWebcam']:
-        face = save_file(request.files['face'])
-    else:
-        face = save_webcam(request.form['faceWebcam'])
+    face = ''
     idcard = save_file(request.files['id'])
-    result['Match'] = match(face, idcard, preview=True)
-    result['Match']['percentage'] = int(result['Match']['percentage'])
-    result['Match']['face'] = "/".join(result['Match']['face'].split("/")[-2:])
-    image, result['OCR'] = recognize_card(idcard, preview=True)
-    result['Match']['idcard'] = "/".join(image.split("/")[-2:])
+    if len(request.form['faceWebcam']) != 0:
+        face = save_webcam(request.form['faceWebcam'])
+    elif len(request.files['face'].filename) != 0:
+        face = save_file(request.files['face'])
+    if face != '':
+        result['Match'] = match(face, idcard, preview=True)
+        result['Match']['percentage'] = int(result['Match']['percentage'])
+        result['Match']['face'] = "/".join(result['Match']['face'].split("/")[-2:])
+    image, result['OCR'] = CardReader(template='kg', image=idcard, preview=True).route()
+    result['OCR']['idcard'] = image
     return render_template('idmatch_landing.html', **locals())
 
 
@@ -60,10 +62,9 @@ def idmatch_landing_demo(lang):
 def idmatch_api():
     face = save_file(request.files['face'])
     idcard = save_file(request.files['id'])
-    card = CardReader(template='kg')
     result = {
         'Match': match(face, idcard),
-        'OCR': recognize_card(idcard)
+        'OCR': CardReader(template='kg', image=idcard).route()
     }
     return Response(json.dumps(result, indent=4), mimetype='application/json')
 

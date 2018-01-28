@@ -43,4 +43,3 @@ KYRILLIC_RULES = {
     "M": "М",
     "T": "Т"
 }
-

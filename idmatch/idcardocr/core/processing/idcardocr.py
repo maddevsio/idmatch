@@ -1,30 +1,16 @@
 # coding: utf-8
-import os
-import sys
-
+import hashlib
 import cv2
 import pytesseract
 from PIL import Image
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(1, os.path.join(BASE_DIR, '../idmatch'))
-
-from idmatch.matching.utils import detect_face
-from idmatch.matching.utils import save_image
-
-MAX_HEIGHT = 40
-MIN_HEIGHT = 16
-MAX_WIDTH = 330
-MIN_WIDTH = 16
-
-
 def recognize_text(original):
     idcard = original
-    gray = cv2.cvtColor(idcard, cv2.COLOR_BGR2GRAY)
+    # gray = cv2.cvtColor(idcard, cv2.COLOR_BGR2GRAY)
 
     # Morphological gradient:
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-    opening = cv2.morphologyEx(gray, cv2.MORPH_GRADIENT, kernel)
+    opening = cv2.morphologyEx(idcard, cv2.MORPH_GRADIENT, kernel)
 
     # Binarization
     ret, binarization = cv2.threshold(opening, 0.0, 255.0, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
@@ -39,45 +25,37 @@ def recognize_text(original):
     )
     return contours, hierarchy
 
-
-def detect_dpi(img):
-    x, y, w, h = detect_face(img)
-    return w
-
-
-def recognize_card(original_image, preview=False):
-    from idmatch.idcardocr.core.preprocessing.image import resize
-    from idmatch.idcardocr.core.processing.crop import process_image
+def recognize_card(idcard):
     result = []
-    cropped_image = "croped-image.jpg"
     # TODO: 
     # process_image(original_image, cropped_image)
     # idcard = cv2.imread(cropped_, cv2.COLOR_BGR2GRAY)
-    idcard = resize(original_image, width=720)
 
-    scale_down = (8 * 170 / detect_dpi(idcard))
-    if scale_down <= 4:
-        rows, cols = idcard.shape[:2]
-        idcard = cv2.resize(idcard, (scale_down * cols / 8, scale_down * rows / 8))
+    # In some cases resized image gives worse results
+    # idcard = resize(idcard, width=720)
 
-    contours, hierarchy = recognize_text(idcard)
-    
+    gray = cv2.cvtColor(idcard, cv2.COLOR_BGR2GRAY)
+    contours, hierarchy = recognize_text(gray)
+
     for index, contour in enumerate(contours):
         [x, y, w, h] = cv2.boundingRect(contour)
-        gray = cv2.cvtColor(idcard, cv2.COLOR_RGB2GRAY)
         roi = gray[y:y + h, x:x + w]
         if cv2.countNonZero(roi) / h * w > 0.55:
             if h > 16 and w > 16:
-                filename = '%s.jpg' % index
-                cv2.imwrite(filename, roi)
-                text = pytesseract.image_to_string(
-                    Image.open(filename), lang="kir+eng", config="-psm 7"
-                )                
-                item = {'x': x, 'y': y, 'w': w, 'h': h, 'text': text}
-                result.append(item)
-                cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
-    if preview:
-        original_image = original_image.split('/')[-1]
-        location = save_image('regions' + original_image, idcard)
-        return location, regionskir(result)
-    return result
+                # filename = '%s.jpg' % index
+                # cv2.imwrite(workdir+'/'+filename, roi)
+                # text = pytesseract.image_to_string(
+                #     Image.open(workdir+'/'+filename), lang="kir+eng", config="-psm 7"
+                # )
+                text = pytesseract.image_to_string(Image.fromarray(roi), lang="kir+eng", config="-psm 7")
+                if len(text) > 0:                
+                    item = {'x': x, 'y': y, 'w': w, 'h': h, 'text': text}
+                    result.append(item)
+                    cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
+    
+    # need to restore settings
+    hash_object = hashlib.sha256(idcard)
+    hex_dig = hash_object.hexdigest()
+    cv2.imwrite("/webapp/web/static/"+hex_dig+".jpeg", idcard)
+
+    return "static/"+hex_dig+".jpeg", result

@@ -1,9 +1,10 @@
 # coding: utf-8
 from .templates.kg import CardKG
-
+import json
 
 class CardReader:
-    def __init__(self, template, image):
+    def __init__(self, template, image, preview=False):
+        self.preview = preview
         self.template = template
         self.image = image
 
@@ -14,6 +15,7 @@ class CardReader:
         return getattr(self, method)()
 
     def template_kg(self):
-        card = CardKG(self.image)
-        return card.processing()
-        
+        img, text = CardKG(self.image).processing()
+        if self.preview:
+            return img, text
+        return json.dumps(text, sort_keys=False, ensure_ascii=False, indent=3)

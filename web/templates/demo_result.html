@@ -10,10 +10,12 @@
   &nbsp;&nbsp;&nbsp;&nbsp;"inn": "<span class="string">{{ result['OCR']['inn'] }}</span>",<br>
   &nbsp;&nbsp;&nbsp;&nbsp;"gender": "<span class="string">{{ result['OCR']['gender'] }}</span>"<br>
   &nbsp;&nbsp;}, <br>
+  {% if 'Match' in result %}
   &nbsp;&nbsp;"Match": { <br>
   &nbsp;&nbsp;&nbsp;&nbsp;"code": "<span class="string">{{ result['Match']['score'] }}</span>",<br>
   &nbsp;&nbsp;&nbsp;&nbsp;"message": "<span class="string">{{ result['Match']['message'] }}</span>",<br>
   &nbsp;&nbsp;&nbsp;&nbsp;"int": "<span class="string">{{ result['Match']['percentage'] }}</span>",<br>
   &nbsp;&nbsp;} <br>
-  }<br>
+  {% endif %}
+}<br>
 </code>

@@ -8,14 +8,19 @@ from .rules import WHITESPACE_RULES
 
 class Sanitizer:
     def __replace_letters(self, text, rules):
-        text = text.upper()
-        for key in rules.iterkeys():
-            text = text.replace(key, rules[key])
+        if text is not None:
+            for key in rules.iterkeys():
+                text = text.replace(key, rules[key])
+        else:
+            text = "" #ugly hack
         return text
 
     def whitespaces(self, text):
-        for item in WHITESPACE_RULES:
-            text = text.replace(item, "")
+        if text is not None:
+            for item in WHITESPACE_RULES:
+                text = text.replace(item, "")
+        else:
+            text = "" #ugly hack2
         return text
 
     def numbers(self, text):
@@ -26,6 +31,3 @@ class Sanitizer:
 
     def kyrillic(self, text):
         return self.__replace_letters(text, KYRILLIC_RULES)
-
-    def gender(self, text):
-        pass
