@@ -61,7 +61,7 @@ ALL_FIELDS = [SURNAME, FIRSTNAME,
 def matchErrorPercent(imgPath, jsonPath, template):
     try:
         reader = CardReader(template, imgPath)
-        json1 = reader.route()
+        json1 = json.loads(reader.route())
         with open(jsonPath) as jpf:
             json2 = json.load(jpf)
         jpf.close()
@@ -70,10 +70,15 @@ def matchErrorPercent(imgPath, jsonPath, template):
         all_symbols_sum = 0
         print("*****************************")
         for key in ALL_FIELDS:
-            s2 = json2[key].upper().encode('utf-8')
+            # HACK!!! Encoding issues :)
+            s2 = json2[key]
             s1 = json1[key]
             s1 = s1 or ""
             s2 = s2 or ""
+            s1 = s1.upper().encode('utf-8')
+            s2 = s2.upper().encode('utf-8')
+            #
+            
             all_symbols_sum += len(s2)
             ds = levenshteinDistance(s1, s2)
             levenstein_sum += ds
@@ -81,6 +86,7 @@ def matchErrorPercent(imgPath, jsonPath, template):
                 ds + ' tanimoto : %f' % tanimoto(s1, s2))
         return levenstein_sum / (float)(all_symbols_sum) * 100.0
     except:
+        traceback.print_exc()
         return 100.0
 
 def levenshteinDistance(s1, s2):
