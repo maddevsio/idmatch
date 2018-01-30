@@ -21,10 +21,11 @@ def cardocr(image, template, preview, check_solution):
         return    
     try:
         result = CardReader(template, image, preview).route()
-        if preview:
-            print result
-        else:
-            print result.encode('utf-8')
+        print result
+        # if preview:
+        #     print result
+        # else:
+        #     print result.encode('utf-8')
     except:
         print("Unhandled exception : ")
         traceback.print_exc()

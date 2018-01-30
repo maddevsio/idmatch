@@ -34,7 +34,9 @@ def remove_borders(image):
             rect = r
 
     screenCnt = np.int0(cv2.boxPoints(rect))
+    
     # cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
+    # cv2.imwrite("workdir/contours.jpg", image)
     
     if screenCnt is not None and len(screenCnt) > 0:
         return four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
