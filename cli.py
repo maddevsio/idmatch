@@ -62,7 +62,10 @@ ALL_FIELDS = [SURNAME, FIRSTNAME,
 def matchErrorPercent(imgPath, jsonPath, template):
     try:
         reader = CardReader(template, imgPath)
-        json1 = json.loads(reader.route())
+
+        _, text = reader.route()
+        json1 = json.loads(text)
+
         with open(jsonPath) as jpf:
             json2 = json.load(jpf)
         jpf.close()
@@ -75,11 +78,7 @@ def matchErrorPercent(imgPath, jsonPath, template):
             s2 = json2[key]
             s1 = json1[key]
             s1 = s1 or ""
-            s2 = s2 or ""
             s1 = s1.upper().encode('utf-8')
-            s2 = s2.upper().encode('utf-8')
-            #
-            
             all_symbols_sum += len(s2)
             ds = levenshteinDistance(s1, s2)
             levenstein_sum += ds

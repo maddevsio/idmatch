@@ -67,5 +67,6 @@ class IDcard(IDcardSanitizer, Blocks):
             'nationality': self.find_nationality(),
             'errors': ", ".join(self.errors)
         }       
-        return {k: v for k, v in data.iteritems()}
+        return {k: v.decode('utf-8') if v else "" for k, v in data.iteritems()}
+
 

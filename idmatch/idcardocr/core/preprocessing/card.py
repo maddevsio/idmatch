@@ -8,7 +8,6 @@ from skimage.filters import threshold_adaptive
 from .image import resize
 from .utils import four_point_transform
 
-
 def remove_borders(image):
     image = cv2.imread(image)
     orig = image.copy()
@@ -34,12 +33,11 @@ def remove_borders(image):
             rect = r
 
     screenCnt = np.int0(cv2.boxPoints(rect))
-    
-    # cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
-    # cv2.imwrite("workdir/contours.jpg", image)
-    
+    im = Image.fromarray(edged)
+
+    cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
+    im = Image.fromarray(image)
+
     if screenCnt is not None and len(screenCnt) > 0:
         return four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
     return orig
-    # cv2.imwrite('original.jpg', orig)
-    # return 'original.jpg'
