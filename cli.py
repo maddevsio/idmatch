@@ -21,10 +21,11 @@ def cardocr(image, template, preview, check_solution):
         return    
     try:
         result = CardReader(template, image, preview).route()
-        if preview:
-            print result
-        else:
-            print result.encode('utf-8')
+        print result
+        # if preview:
+        #     print result
+        # else:
+        #     print result.encode('utf-8')
     except:
         print("Unhandled exception : ")
         traceback.print_exc()
@@ -61,8 +62,10 @@ ALL_FIELDS = [SURNAME, FIRSTNAME,
 def matchErrorPercent(imgPath, jsonPath, template):
     try:
         reader = CardReader(template, imgPath)
+
         _, text = reader.route()
         json1 = json.loads(text)
+
         with open(jsonPath) as jpf:
             json2 = json.load(jpf)
         jpf.close()
@@ -71,7 +74,8 @@ def matchErrorPercent(imgPath, jsonPath, template):
         all_symbols_sum = 0
         print("*****************************")
         for key in ALL_FIELDS:
-            s2 = json2[key].upper().encode('utf-8')
+            # HACK!!! Encoding issues :)
+            s2 = json2[key]
             s1 = json1[key]
             s1 = s1 or ""
             s1 = s1.upper().encode('utf-8')

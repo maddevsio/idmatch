@@ -69,3 +69,4 @@ class IDcard(IDcardSanitizer, Blocks):
         }       
         return {k: v.decode('utf-8') if v else "" for k, v in data.iteritems()}
 
+
