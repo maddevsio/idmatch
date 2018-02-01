@@ -2,6 +2,7 @@
 import hashlib
 import cv2
 import pytesseract
+import numpy as np
 from PIL import Image
 
 def recognize_text(original):
@@ -35,27 +36,31 @@ def recognize_card(idcard):
     # idcard = resize(idcard, width=720)
 
     gray = cv2.cvtColor(idcard, cv2.COLOR_BGR2GRAY)
+    denoised = cv2.fastNlMeansDenoising(gray, None, 3, 7, 21)
+    
     contours, hierarchy = recognize_text(gray)
+    mask = np.zeros(gray.shape, np.uint8)
 
     for index, contour in enumerate(contours):
         [x, y, w, h] = cv2.boundingRect(contour)
-        roi = gray[y:y + h, x:x + w]
-        if cv2.countNonZero(roi) / h * w > 0.55:
-            if h > 16 and w > 16:
-                # filename = '%s.jpg' % index
-                # cv2.imwrite(workdir+'/'+filename, roi)
-                # text = pytesseract.image_to_string(
-                #     Image.open(workdir+'/'+filename), lang="kir+eng", config="-psm 7"
-                # )
-                text = pytesseract.image_to_string(Image.fromarray(roi), lang="kir+eng", config="-psm 7")
-                if len(text) > 0:                
-                    item = {'x': x, 'y': y, 'w': w, 'h': h, 'text': text}
-                    result.append(item)
-                    cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
-    
+        if h < 16 or w < 16:
+            continue
+
+        mskRoi = mask[y:y+h, x:x+w]
+        cv2.drawContours(mask, [contour], 0, 255, -1) #CV_FILLED
+        nz = cv2.countNonZero(mskRoi)
+        ratio = (float)(nz) / (float)(h*w)
+        
+        # got this value from left heel
+        if ratio > 0.55 and ratio < 0.9:
+            roi = denoised[y:y+h, x:x+w] 
+            text = pytesseract.image_to_string(Image.fromarray(roi), lang="kir+eng", config="-psm 7")
+            if text:                
+                item = {'x': x, 'y': y, 'w': w, 'h': h, 'text': text}
+                result.append(item)
+                cv2.rectangle(idcard, (x, y), (x + w, y + h), (255, 0, 255), 2)
     # need to restore settings
     hash_object = hashlib.sha256(idcard)
     hex_dig = hash_object.hexdigest()
     cv2.imwrite("/webapp/web/static/"+hex_dig+".jpeg", idcard)
-
     return "static/"+hex_dig+".jpeg", result

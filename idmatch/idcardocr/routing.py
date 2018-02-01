@@ -18,4 +18,4 @@ class CardReader:
         img, text = CardKG(self.image).processing()
         if self.preview:
             return img, text
-        return json.dumps(text, sort_keys=False, ensure_ascii=False, indent=3)
+        return img, json.dumps(text, sort_keys=False, ensure_ascii=False, indent=3)
