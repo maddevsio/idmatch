@@ -20,9 +20,9 @@ def cardocr(image, template, preview, check_solution):
         checkSolution(check_solution, template)
         return    
     try:
-        result = CardReader(template, image, preview).route()
+        img, result = CardReader(template, image, preview).route()
         if preview:
-            print result
+            print (img,result)
         else:
             print result.encode('utf-8')
     except:
