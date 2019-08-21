@@ -25,5 +25,5 @@ six==1.10.0
 SOAPpy==0.12.22
 tesserocr==2.1.3
 uWSGI==2.0.15
-Werkzeug==0.12.2
+Werkzeug==0.15.3
 wstools==0.4.3
